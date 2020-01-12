@@ -8,7 +8,6 @@
    
    Ce module gère un joueur. 
 """
-# ok
 def Joueur(nom):
     """
     creer un nouveau joueur portant le nom passé en paramètre. Ce joueur possède une liste de trésors à trouver vide
