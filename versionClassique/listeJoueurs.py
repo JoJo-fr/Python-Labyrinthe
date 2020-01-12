@@ -18,7 +18,10 @@ def ListeJoueurs(nomsJoueurs):
     paramètre: nomsJoueurs une liste de chaines de caractères
     résultat: la liste des joueurs avec un joueur courant mis à 0
     """
-    pass
+    liste_joueur = []
+    for nom in nomsJoueurs:
+        liste_joueur.append((nom,[]))
+    return liste_joueur
 
 def ajouterJoueur(joueurs, joueur):
     """
@@ -27,7 +30,7 @@ def ajouterJoueur(joueurs, joueur):
                 joueur le joueur à ajouter
     cette fonction ne retourne rien mais modifie la liste des joueurs
     """
-    pass
+    joueurs.append(joueur)
 
 def initAleatoireJoueurCourant(joueurs):
     """
@@ -35,7 +38,10 @@ def initAleatoireJoueurCourant(joueurs):
     paramètre: joueurs un liste de joueurs
     cette fonction ne retourne rien mais modifie la liste des joueurs
     """
-    pass
+    joueur_courant = joueurs.random.randint(0,len(joueurs))
+    del joueurs[joueurs.index(joueur_courant)]
+    joueurs.append(joueur_courant)
+
 def distribuerTresors(joueurs,nbTresors=24, nbTresorMax=0):
     """
     distribue de manière aléatoire des trésors entre les joueurs.
@@ -48,7 +54,15 @@ def distribuerTresors(joueurs,nbTresors=24, nbTresorMax=0):
                              de trésor possible  
     cette fonction ne retourne rien mais modifie la liste des joueurs
     """
-    pass
+    liste_trésor_pris = []
+    for J in range(len(joueurs)):
+        trésor = random.randint(1, nbTresors)
+        while len(joueurs[J][1]) != nbTresorMax:
+            if trésor not in liste_trésor_pris or liste_trésor_pris == []:
+                joueurs[J][1].append(trésor)
+                liste_trésor_pris.append(trésor)
+                trésor = random.randint(1, nbTresors)
+            trésor = random.randint(1, nbTresors)
 
 def changerJoueurCourant(joueurs):
     """
@@ -56,7 +70,10 @@ def changerJoueurCourant(joueurs):
     paramètres: joueurs la liste des joueurs
     cette fonction ne retourne rien mais modifie la liste des joueurs
     """   
-    pass
+    joueur_suivant = joueurs[1]
+    joueur_courant_remplacer = joueurs[0]
+    del joueurs[0]
+    joueurs.append(joueur_courant_remplacer)
 
 def getNbJoueurs(joueurs):
     """
@@ -64,15 +81,15 @@ def getNbJoueurs(joueurs):
     paramètre: joueurs la liste des joueurs
     résultat: le nombre de joueurs de la partie
     """
-    pass
+    return len(joueurs)
 
 def getJoueurCourant(joueurs):
     """
     retourne le joueur courant
     paramètre: joueurs la liste des joueurs
-    cette fonction ne retourne rien mais modifie la liste des joueurs
+    résultat: le joueur courant
     """
-    pass
+    return joueurs[0]
 
 def joueurCourantTrouveTresor(joueurs):
     """
@@ -81,7 +98,7 @@ def joueurCourantTrouveTresor(joueurs):
     paramètre: joueurs la liste des joueurs
     cette fonction ne retourne rien mais modifie la liste des joueurs
     """
-    pass
+    del joueurs[0][1][0]
 
 def nbTresorsRestantsJoueur(joueurs,numJoueur):
     """
@@ -91,14 +108,14 @@ def nbTresorsRestantsJoueur(joueurs,numJoueur):
                 numJoueur le numéro du joueur
     résultat: le nombre de trésors que joueur numJoueur doit encore trouver
     """
-    pass
-
+    Nb_trésor = joueurs[numJoueur-1][1]
+    return len(Nb_trésor)
 def numJoueurCourant(joueurs):
     """
     retourne le numéro du joueur courant
     paramètre: joueurs la liste des joueurs
     résultat: le numéro du joueur courant
-    """
+    """ 
     pass
 
 def nomJoueurCourant(joueurs):
@@ -107,7 +124,7 @@ def nomJoueurCourant(joueurs):
     paramètre: joueurs la liste des joueurs
     résultat: le nom du joueur courant
     """
-    pass
+    return joueurs[0][0]
 
 def nomJoueur(joueurs,numJoueur):
     """
@@ -116,7 +133,7 @@ def nomJoueur(joueurs,numJoueur):
                 numJoueur le numéro du joueur    
     résultat: le nom du joueur numJoueur
     """
-    pass
+    return joueurs[numJoueur][0]
 
 def prochainTresorJoueur(joueurs,numJoueur):
     """
@@ -125,7 +142,7 @@ def prochainTresorJoueur(joueurs,numJoueur):
                 numJoueur le numéro du joueur    
     résultat: le prochain trésor du joueur numJoueur (un entier)
     """
-    pass
+    return joueurs[1][numJoueur]
 
 def tresorCourant(joueurs):
     """
@@ -133,7 +150,7 @@ def tresorCourant(joueurs):
     paramètre: joueurs la liste des joueurs 
     résultat: le prochain trésor du joueur courant (un entier)
     """
-    pass
+    return joueurs[0][1]
 
 def joueurCourantAFini(joueurs):
     """
@@ -141,4 +158,7 @@ def joueurCourantAFini(joueurs):
     paramètre: joueurs la liste des joueurs 
     résultat: un booleen indiquant si le joueur courant a fini
     """
-    pass
+    if tresorCourant(joueurs) == []:
+        return True
+    return False
+    

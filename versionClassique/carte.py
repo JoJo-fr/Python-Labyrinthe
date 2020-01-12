@@ -27,49 +27,52 @@ def Carte( nord, est, sud, ouest, tresor=0, pions=[]):
     tresor est le numéro du trésor qui se trouve sur la carte (0 s'il n'y a pas de trésor)
     pions est la liste des pions qui sont posés sur la carte (un pion est un entier entre 1 et 4)
     """
-    pass
+    Carte_drop = (nord,est,sud,ouest,tresor,pions)
+    return Carte_drop
 
 def estValide(c):
     """
     retourne un booléen indiquant si la carte est valide ou non c'est à dire qu'elle a zéro un ou deux murs
     paramètre: c une carte
     """
-    pass
+    if murNord(c) or murOuest(c) or murEst(c) or murSud(c):
+        return True
+    return False
 
 def murNord(c):
     """
     retourne un booléen indiquant si la carte possède un mur au nord
     paramètre: c une carte
     """
-    pass
+    print(c)
+    return c[0]
 
 def murSud(c):
     """
     retourne un booléen indiquant si la carte possède un mur au sud
     paramètre: c une carte
     """
-    pass
+    return c[2]
 
 def murEst(c):
     """
     retourne un booléen indiquant si la carte possède un mur à l'est
     paramètre: c une carte
     """
-    pass
-
+    return c[1]
 def murOuest(c):
     """
     retourne un booléen indiquant si la carte possède un mur à l'ouest
     paramètre: c une carte
     """
-    pass
+    return c[3]
 
 def getListePions(c):
     """
     retourne la liste des pions se trouvant sur la carte
     paramètre: c une carte
     """
-    pass
+    return c[5]
 
 def setListePions(c,listePions):
     """
@@ -78,14 +81,15 @@ def setListePions(c,listePions):
                 listePions: la liste des pions à poser
     Cette fonction ne retourne rien mais modifie la carte
     """
-    pass
+    for pion in listePions:
+        c[5].append(pion)
 
 def getNbPions(c):
     """
     retourne le nombre de pions se trouvant sur la carte
     paramètre: c une carte
     """
-    pass
+    return len(c[5])
 
 def possedePion(c,pion):
     """
@@ -93,7 +97,9 @@ def possedePion(c,pion):
     paramètres: c une carte
                 pion un entier compris entre 1 et 4
     """
-    pass
+    if pion in c[5]:
+        return True
+    return False
 
 
 def getTresor(c):
@@ -101,7 +107,9 @@ def getTresor(c):
     retourne la valeur du trésor qui se trouve sur la carte (0 si pas de trésor)
     paramètre: c une carte
     """
-    pass
+    if c[4] != None:
+        return c[4]
+    return 0
 
 def prendreTresor(c):
     """
@@ -109,7 +117,10 @@ def prendreTresor(c):
     paramètre: c une carte
     résultat l'entier représentant le trésor qui était sur la carte
     """
-    pass
+    trésor = c[4]
+    del c[4]
+    return trésor 
+
 def mettreTresor(c,tresor):
     """
     met le trésor passé en paramètre sur la carte et retourne la valeur de l'ancien trésor
@@ -117,7 +128,9 @@ def mettreTresor(c,tresor):
                 tresor un entier positif
     résultat l'entier représentant le trésor qui était sur la carte
     """
-    pass
+    trésor_remplacer = c[4]
+    c[4] == tresor
+    return trésor_remplacer
 
 def prendrePion(c, pion):
     """
@@ -126,7 +139,8 @@ def prendrePion(c, pion):
                 pion un entier compris entre 1 et 4
     Cette fonction modifie la carte mais ne retourne rien
     """
-    pass
+    if c[5] != []:
+        del c[5][pion+1]
 
 def poserPion(c, pion):
     """
@@ -135,7 +149,8 @@ def poserPion(c, pion):
                 pion un entier compris entre 1 et 4
     Cette fonction modifie la carte mais ne retourne rien
     """
-    pass
+    if c[5] not in pion:
+        c[5] == pion
 
 def tournerHoraire(c):
     """
@@ -196,7 +211,9 @@ def passageNord(carte1,carte2):
     paramètres carte1 et carte2 deux cartes
     résultat un booléen
     """
-    pass
+    if murNord(carte1) and murSud(carte2):
+        return True
+    return False
 
 def passageSud(carte1,carte2):
     """
@@ -205,7 +222,9 @@ def passageSud(carte1,carte2):
     paramètres carte1 et carte2 deux cartes
     résultat un booléen
     """
-    pass
+    if murSud(carte1) and murNord(carte2):
+        return True
+    return False
 
 def passageOuest(carte1,carte2):
     """
@@ -214,7 +233,9 @@ def passageOuest(carte1,carte2):
     paramètres carte1 et carte2 deux cartes
     résultat un booléen
     """
-    pass
+    if murOuest(carte1) and murEst(carte2):
+        return True
+    return False
 
 def passageEst(carte1,carte2):
     """
@@ -223,4 +244,6 @@ def passageEst(carte1,carte2):
     paramètres carte1 et carte2 deux cartes
     résultat un booléen    
     """
-    pass
+    if murOuest(carte1) and murEst(carte2):
+        return True
+    return False
