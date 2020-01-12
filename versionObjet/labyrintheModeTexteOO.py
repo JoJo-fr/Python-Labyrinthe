@@ -9,6 +9,7 @@
 
 """
 
+# t'est 
 from labyrintheOO import *
 from ansiColor import *
 import sys
