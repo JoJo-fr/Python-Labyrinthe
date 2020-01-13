@@ -42,9 +42,19 @@ def estValide(c):
     retourne un booléen indiquant si la carte est valide ou non c'est à dire qu'elle a zéro un ou deux murs
     paramètre: c une carte
     """
-    if murNord(c) or murOuest(c) or murEst(c) or murSud(c):
+    cpt=0
+    if murNord(c):
+        cpt+=1
+    if murOuest(c):
+        cpt+=1
+    if murEst(c):
+        cpt+=1
+    if murSud(c):
+        cpt+=1
+    if cpt>2:
+        return False
+    else:
         return True
-    return False
 
 def murNord(c):  # ok
     """
@@ -107,9 +117,9 @@ def possedePion(c,pion):
                 pion un entier compris entre 1 et 4
     """
     if pion in c["Pions"]:
-        return True
-    else:
         return False
+    else:
+        return True
 
 
 def getTresor(c):  # ok
@@ -242,9 +252,10 @@ def passageNord(carte1,carte2):
     paramètres carte1 et carte2 deux cartes
     résultat un booléen
     """
-    if murNord(carte1) and murSud(carte2):
+    if not murNord(carte1) and not murSud(carte2):
         return True
-    return False
+    else:
+        return False
 
 def passageSud(carte1,carte2):
     """
@@ -253,9 +264,10 @@ def passageSud(carte1,carte2):
     paramètres carte1 et carte2 deux cartes
     résultat un booléen
     """
-    if murSud(carte1) and murNord(carte2):
+    if not murSud(carte1) and not murNord(carte2):
         return True
-    return False
+    else:
+        return False
 
 def passageOuest(carte1,carte2):
     """
@@ -264,9 +276,10 @@ def passageOuest(carte1,carte2):
     paramètres carte1 et carte2 deux cartes
     résultat un booléen
     """
-    if murOuest(carte1) and murEst(carte2):
+    if not murOuest(carte1) and not murEst(carte2):
         return True
-    return False
+    else:
+        return False
 
 def passageEst(carte1,carte2):
     """
@@ -275,22 +288,18 @@ def passageEst(carte1,carte2):
     paramètres carte1 et carte2 deux cartes
     résultat un booléen    
     """
-    if murOuest(carte1) and murEst(carte2):
+    if not murEst(carte1) and not murOuest(carte2):
         return True
-    return False
+    else:
+        return False
 
 
 # python3 test... -v 
 # test_coderMurs (__main__.TestCarte) ... FAIL
 # test_decoderMurs (__main__.TestCarte) ... FAIL
-# test_estValide (__main__.TestCarte) ... FAIL
 # test_getTresor_mettreTresor (__main__.TestCarte) ... FAIL
 # test_getTresor_prendreTresor (__main__.TestCarte) ... ERROR
 # test_listePions (__main__.TestCarte) ... FAIL
-# test_passageEst (__main__.TestCarte) ... FAIL
-# test_passageNord (__main__.TestCarte) ... FAIL
-# test_passageOuest (__main__.TestCarte) ... FAIL
-# test_passageSud (__main__.TestCarte) ... FAIL
 # test_possede_Pion (__main__.TestCarte) ... FAIL
 # test_possede_pendre_Pion (__main__.TestCarte) ... FAIL
 # test_possede_poser_Pion (__main__.TestCarte) ... FAIL
