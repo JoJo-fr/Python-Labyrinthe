@@ -192,7 +192,6 @@ def tournerHoraire(c):  # ok
     c["Sud"]=liste[2]
     c["Ouest"]=liste[3]
     
-    #horaire=(nord,est,sud,ouest,c[4],c[5])
 
 def tournerAntiHoraire(c):  # ok
     """
@@ -243,8 +242,19 @@ def decoderMurs(c,code):
     paramètres c une carte
                code un entier codant les murs d'une carte
     Cette fonction modifie la carte mais ne retourne rien
-    """    
-    pass
+    """
+    murs=[]
+    for i in reversed(range(4)):
+        print(i)
+        if code-2**i >=0:
+            code -=2**i
+            murs.append(True)
+        elif code-2**i<=0:
+            murs.append(False)
+    c["Nord"]=murs[3]
+    c["Est"]=murs[2]
+    c["Sud"]=murs[1]
+    c["Ouest"]=murs[0]
 def toChar(c):
     """
     fournit le caractère semi graphique correspondant à la carte (voir la variable listeCartes au début de ce script)
@@ -306,9 +316,4 @@ def passageEst(carte1,carte2):
 
 
 # python3 test... -v 
-# test_decoderMurs (__main__.TestCarte) ... FAIL
-# test_getTresor_mettreTresor (__main__.TestCarte) ... FAIL
-# test_possede_Pion (__main__.TestCarte) ... FAIL
-# test_possede_pendre_Pion (__main__.TestCarte) ... FAIL
-# test_possede_poser_Pion (__main__.TestCarte) ... FAIL
 # test_toChar (__main__.TestCarte) ... FAIL
