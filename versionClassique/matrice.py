@@ -88,6 +88,7 @@ def afficheLigneSeparatrice(matrice, tailleCellule=4):
 
 def afficheMatrice(matrice, tailleCellule=4):
     """
+    Affiche la matrice en mode texte
     """
     nbColonnes = getNbColonnes(matrice)
     nbLignes = getNbLignes(matrice)
@@ -117,7 +118,14 @@ def decalageLigneAGauche(matrice, numLig, nouvelleValeur=0):
                  nouvelleValeur la valeur à placer
     résultat la valeur qui a été ejectée lors du décalage
     """
-    pass
+    matriceClone = matrice
+    res = getVal(matrice, numLig, 0) # la valeur a exclure 
+    for x in range(0,7):
+        print(x)
+        setVal(matrice,numLig,x,getVal(matriceClone,numLig,x+1))
+    setVal(matrice,numLig,6,nouvelleValeur) # ajout de la nouvelle valeur a droite car on decale a gauche 
+
+    return res
 
 def decalageLigneADroite(matrice, numLig, nouvelleValeur=0):
     """
@@ -128,7 +136,16 @@ def decalageLigneADroite(matrice, numLig, nouvelleValeur=0):
                  nouvelleValeur la valeur à placer
     résultat: la valeur de la case "ejectée" par le décalage
     """
-    pass
+    matriceClone = matrice
+    res = getVal(matrice, numLig, 6) # la valeur a exclure 
+    
+    for x in range(6,-1,-1):
+        setVal(matrice,numLig,x,getVal(matriceClone,numLig,x-1))
+
+    setVal(matrice,numLig,0,nouvelleValeur) # ajout de la nouvelle valeur a gauche car on decale a droite 
+
+    return res
+
 def decalageColonneEnHaut(matrice, numCol, nouvelleValeur=0):
     """
     decale la colonne numCol d'une case vers le haut en insérant une nouvelle
@@ -138,7 +155,15 @@ def decalageColonneEnHaut(matrice, numCol, nouvelleValeur=0):
                  nouvelleValeur la valeur à placer
     résultat: la valeur de la case "ejectée" par le décalage
     """
-    pass
+    matriceClone = matrice
+    res = getVal(matrice, 0, numCol) # la valeur a exclure 
+    for x in range(0,6):
+        print(x)
+        setVal(matrice,x,numCol,getVal(matriceClone,x+1,numCol))
+    setVal(matrice,6,numCol,getVal(matriceClone,6,numCol))
+    setVal(matrice,6,numCol,nouvelleValeur) # ajout de la nouvelle valeur a droite car on decale a gauche 
+
+    return res
 
 def decalageColonneEnBas(matrice, numCol, nouvelleValeur=0):
     """
@@ -149,5 +174,26 @@ def decalageColonneEnBas(matrice, numCol, nouvelleValeur=0):
                  nouvelleValeur la valeur à placer
     résultat: la valeur de la case "ejectée" par le décalage
     """
-    pass
+    matriceClone = matrice
+    res = getVal(matrice, 0, numCol) # la valeur a exclure 
+    for x in range(0,6):
+        print(x)
+        setVal(matrice,x,numCol,getVal(matriceClone,x+1,numCol))
 
+    setVal(matrice,6,numCol,getVal(matriceClone,6,numCol))
+    setVal(matrice,6,numCol,nouvelleValeur) # ajout de la nouvelle valeur a droite car on decale a gauche 
+
+    return res
+
+
+# x = Matrice(7,7)
+# setVal(x,0,2,10)
+# setVal(x,1,2,11)
+# setVal(x,2,2,12)
+# setVal(x,3,2,13)
+# setVal(x,4,2,14)
+# setVal(x,5,2,15)
+# setVal(x,6,2,16)
+# afficheMatrice(x) 
+# print("Valeur dégagé : " + str(decalageColonneEnBas(x,2,8)))
+# afficheMatrice(x) 
