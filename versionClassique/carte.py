@@ -42,9 +42,19 @@ def estValide(c):
     retourne un booléen indiquant si la carte est valide ou non c'est à dire qu'elle a zéro un ou deux murs
     paramètre: c une carte
     """
-    if murNord(c) or murOuest(c) or murEst(c) or murSud(c):
+    cpt=0
+    if murNord(c):
+        cpt+=1
+    if murOuest(c):
+        cpt+=1
+    if murEst(c):
+        cpt+=1
+    if murSud(c):
+        cpt+=1
+    if cpt>2:
+        return False
+    else:
         return True
-    return False
 
 def murNord(c):  # ok
     """
@@ -107,9 +117,9 @@ def possedePion(c,pion):
                 pion un entier compris entre 1 et 4
     """
     if pion in c["Pions"]:
-        return True
-    else:
         return False
+    else:
+        return True
 
 
 def getTresor(c):  # ok
