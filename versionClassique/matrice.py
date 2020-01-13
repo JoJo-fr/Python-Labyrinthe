@@ -23,21 +23,31 @@ def Matrice(nbLignes,nbColonnes,valeurParDefaut=0):
       valeurParDefaut la valeur par défaut
     résultat la matrice ayant les bonnes propriétés
     """
-    pass
+    if nbColonnes > 0 and nbLignes > 0 :
+        mat = {}
+        mat['nbLignes'] = nbLignes
+        mat['nbColonnes'] = nbColonnes
+        mat['val'] = [valeurParDefaut]*(nbColonnes*nbLignes)
+        return mat
+    else:
+        return "Erreur, nbColones et nbLinges doivent etres positifs"
+
+
+
 
 def getNbLignes(matrice):
     """
     retourne le nombre de lignes de la matrice
     paramètre: matrice la matrice considérée
     """
-    pass
+    return matrice["nbLignes"]
 
 def getNbColonnes(matrice):
     """
     retourne le nombre de colonnes de la matrice
     paramètre: matrice la matrice considérée
     """
-    pass
+    return matrice["nbColonnes"]
 
 def getVal(matrice,ligne,colonne):
     """
@@ -46,7 +56,8 @@ def getVal(matrice,ligne,colonne):
                 ligne le numéro de la ligne (en commençant par 0)
                 colonne le numéro de la colonne (en commençant par 0)
     """
-    pass
+    return matrice['val'][ligne * getNbColonnes(matrice) + colonne]
+
 
 def setVal(matrice,ligne,colonne,valeur):
     """
@@ -57,7 +68,7 @@ def setVal(matrice,ligne,colonne,valeur):
                 valeur la valeur à stocker dans la matrice
     cette fonction ne retourne rien mais modifie la matrice
     """
-    pass
+    matrice['val'][ligne * getNbColonnes(matrice) + colonne] = valeur
 
 
 #------------------------------------------        
