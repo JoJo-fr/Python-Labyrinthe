@@ -36,6 +36,13 @@ def Carte( nord, est, sud, ouest, tresor=0, pions=[]):
         "Pions":pions}
 
     return Carte_drop
+assert Carte(True,True,False,False,5,[1,2,3,4]) == {
+        "Nord":True,
+        "Est":True,
+        "Sud":False,
+        "Ouest":False,
+        "Trésor":5,
+        "Pions":[1,2,3,4]}
 
 def estValide(c):
     """
@@ -99,9 +106,7 @@ def setListePions(c,listePions):
                 listePions: la liste des pions à poser
     Cette fonction ne retourne rien mais modifie la carte
     """
-    for pion in listePions:
-        if pion not in c["Pions"]:
-            c["Pions"].append(pion)
+    c["¨Pions"]=listePions
 
 def getNbPions(c): # ok 
     """
@@ -116,10 +121,8 @@ def possedePion(c,pion):
     paramètres: c une carte
                 pion un entier compris entre 1 et 4
     """
-    if pion in c["Pions"]:
-        return False
-    else:
-        return True
+    return True if pion in c["Pions"] else False
+
 
 
 def getTresor(c):  # ok
@@ -138,7 +141,7 @@ def prendreTresor(c):
     résultat l'entier représentant le trésor qui était sur la carte
     """
     trésor = c["Trésor"]
-    del c[4]
+    c["Trésor"]=0
     return trésor 
 
 def mettreTresor(c,tresor):
