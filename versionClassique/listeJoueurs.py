@@ -41,7 +41,7 @@ def initAleatoireJoueurCourant(joueurs):
     joueur_courant = joueurs.random.randint(1,len(joueurs)-1)
     joueur_choisie = joueurs[joueur_courant]
     joueurs.pop(0)
-    joueurs.extend(joueur_choisie)
+    joueurs.append(joueur_choisie)
 
 def distribuerTresors(joueurs,nbTresors=24, nbTresorMax=0):
     """
@@ -66,14 +66,14 @@ def distribuerTresors(joueurs,nbTresors=24, nbTresorMax=0):
 
    
     
-def changerJoueurCourant(joueurs):
+def changerJoueurCourant(joueurs): # à fixer
     """
     passe au joueur suivant (change le joueur courant donc)
     paramètres: joueurs la liste des joueurs
     cette fonction ne retourne rien mais modifie la liste des joueurs
     """
     joueur_courant_changer = joueurs[0]
-    del joueurs[0]
+    joueurs.pop(0)
     joueurs.extend(joueur_courant_changer)
 
 def getNbJoueurs(joueurs):
@@ -92,7 +92,7 @@ def getJoueurCourant(joueurs):
     """
     return joueurs[0]
 
-def joueurCourantTrouveTresor(joueurs):
+def joueurCourantTrouveTresor(joueurs): # à fixer
     """
     Met à jour le joueur courant lorsqu'il a trouvé un trésor
     c-à-d enlève le trésor de sa liste de trésors à trouver
@@ -109,18 +109,17 @@ def nbTresorsRestantsJoueur(joueurs,numJoueur):
                 numJoueur le numéro du joueur
     résultat: le nombre de trésors que joueur numJoueur doit encore trouver
     """
-    return getNbTresorsRestants(joueurs[numJoueur+1])
+    return getNbTresorsRestants(joueurs[numJoueur-1])
 
-def numJoueurCourant(joueurs):
+def numJoueurCourant(joueurs): # à fixer
     """
     retourne le numéro du joueur courant
     paramètre: joueurs la liste des joueurs
     résultat: le numéro du joueur courant
     """ 
-    J = joueurs[0]
-    return J["Numéro"]
+    pass
 
-def nomJoueurCourant(joueurs):
+def nomJoueurCourant(joueurs): # à fixer
     """
     retourne le nom du joueur courant
     paramètre: joueurs la liste des joueurs
@@ -154,7 +153,7 @@ def tresorCourant(joueurs):
     """
     return joueurs["Trésor"]
 
-def joueurCourantAFini(joueurs):
+def joueurCourantAFini(joueurs): # à fixer
     """
     indique si le joueur courant a gagné
     paramètre: joueurs la liste des joueurs 
