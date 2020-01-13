@@ -19,8 +19,12 @@ def ListeJoueurs(nomsJoueurs):
     résultat: la liste des joueurs avec un joueur courant mis à 0
     """
     liste_joueur = []
+    Position_joueur = 0
     for nom in nomsJoueurs:
         liste_joueur.append(Joueur(nom))
+    for joueur in liste_joueur:
+        Position_joueur += 1
+        joueur["Numero_joueur"] = Position_joueur
     return liste_joueur
 
 def ajouterJoueur(joueurs, joueur):
@@ -74,7 +78,7 @@ def changerJoueurCourant(joueurs): # à fixer
     """
     joueur_courant_changer = joueurs[0]
     joueurs.pop(0)
-    joueurs.extend(joueur_courant_changer)
+    joueurs.insert(len(joueurs),joueur_courant_changer)
 
 def getNbJoueurs(joueurs):
     """
@@ -117,7 +121,8 @@ def numJoueurCourant(joueurs): # à fixer
     paramètre: joueurs la liste des joueurs
     résultat: le numéro du joueur courant
     """ 
-    pass
+    joueur = joueurs[0]
+    return joueur["Numero_joueur"]
 
 def nomJoueurCourant(joueurs): # à fixer
     """
