@@ -23,21 +23,31 @@ def Matrice(nbLignes,nbColonnes,valeurParDefaut=0):
       valeurParDefaut la valeur par défaut
     résultat la matrice ayant les bonnes propriétés
     """
-    pass
+    if nbColonnes > 0 and nbLignes > 0 :
+        mat = {}
+        mat['nbLignes'] = nbLignes
+        mat['nbColonnes'] = nbColonnes
+        mat['val'] = [valeurParDefaut]*(nbColonnes*nbLignes)
+        return mat
+    else:
+        return "Erreur, nbColones et nbLinges doivent etres positifs"
+
+
+
 
 def getNbLignes(matrice):
     """
     retourne le nombre de lignes de la matrice
     paramètre: matrice la matrice considérée
     """
-    pass
+    return matrice["nbLignes"]
 
 def getNbColonnes(matrice):
     """
     retourne le nombre de colonnes de la matrice
     paramètre: matrice la matrice considérée
     """
-    pass
+    return matrice["nbColonnes"]
 
 def getVal(matrice,ligne,colonne):
     """
@@ -46,7 +56,8 @@ def getVal(matrice,ligne,colonne):
                 ligne le numéro de la ligne (en commençant par 0)
                 colonne le numéro de la colonne (en commençant par 0)
     """
-    pass
+    return matrice['val'][ligne * getNbColonnes(matrice) + colonne]
+
 
 def setVal(matrice,ligne,colonne,valeur):
     """
@@ -57,7 +68,40 @@ def setVal(matrice,ligne,colonne,valeur):
                 valeur la valeur à stocker dans la matrice
     cette fonction ne retourne rien mais modifie la matrice
     """
-    pass
+    matrice['val'][ligne * getNbColonnes(matrice) + colonne] = valeur
+
+
+#-----------------------------------------
+# Fonctions utiles au débuggage
+#-----------------------------------------
+
+def afficheLigneSeparatrice(matrice, tailleCellule=4):
+    """
+    Affichage d'une matrice
+    fonction annexe pour afficher les lignes séparatrices
+    """
+    print()
+    for i in range(getNbColonnes(matrice) + 1):
+        print('-' * tailleCellule + '+', end='')
+    print()
+
+
+def afficheMatrice(matrice, tailleCellule=4):
+    """
+    """
+    nbColonnes = getNbColonnes(matrice)
+    nbLignes = getNbLignes(matrice)
+    print(' ' * tailleCellule + '|', end='')
+    for i in range(nbColonnes):
+        print(str(i).center(tailleCellule) + '|', end='')
+    afficheLigneSeparatrice(matrice, tailleCellule)
+    for i in range(nbLignes):
+        print(str(i).rjust(tailleCellule) + '|', end='')
+        for j in range(nbColonnes):
+            print(str(getVal(matrice, i, j)).rjust(tailleCellule) + '|', end='')
+        afficheLigneSeparatrice(matrice, tailleCellule)
+    print()
+
 
 
 #------------------------------------------        
