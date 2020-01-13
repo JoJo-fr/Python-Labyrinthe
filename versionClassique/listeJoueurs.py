@@ -165,6 +165,6 @@ def joueurCourantAFini(joueurs):
     paramètre: joueurs la liste des joueurs 
     résultat: un booleen indiquant si le joueur courant a fini
     """
-    if tresorCourant(joueurs) == []:
+    if joueurs[0]["Trésor"] == []:
         return True
     return False
