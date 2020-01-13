@@ -106,7 +106,7 @@ def setListePions(c,listePions):
                 listePions: la liste des pions à poser
     Cette fonction ne retourne rien mais modifie la carte
     """
-    c["¨Pions"]=listePions
+    c["Pions"]=listePions
 
 def getNbPions(c): # ok 
     """
@@ -152,7 +152,7 @@ def mettreTresor(c,tresor):
     résultat l'entier représentant le trésor qui était sur la carte
     """
     trésor_remplacé = c["Trésor"]
-    c["Trésor"] == tresor
+    c["Trésor"] = tresor
     return trésor_remplacé
 
 def prendrePion(c, pion):
@@ -162,11 +162,8 @@ def prendrePion(c, pion):
                 pion un entier compris entre 1 et 4
     Cette fonction modifie la carte mais ne retourne rien
     """
-    liste=list(c)
-    for i in range(len(liste[5])):
-        if liste[5][i]==pion:
-            del liste[5][i]
-    c=tuple(liste)
+    if pion in c["Pions"]:
+        c["Pions"].remove(pion)
 
 def poserPion(c, pion):
     """
@@ -175,10 +172,8 @@ def poserPion(c, pion):
                 pion un entier compris entre 1 et 4
     Cette fonction modifie la carte mais ne retourne rien
     """
-    liste=list(c)
-    if pion not in liste:
-        liste.append(pion)
-    c=tuple(liste)
+    if pion not in c["Pions"]:
+        c["Pions"].append(pion)
 
         
 
@@ -197,7 +192,6 @@ def tournerHoraire(c):  # ok
     c["Sud"]=liste[2]
     c["Ouest"]=liste[3]
     
-    #horaire=(nord,est,sud,ouest,c[4],c[5])
 
 def tournerAntiHoraire(c):  # ok
     """
@@ -217,9 +211,7 @@ def tourneAleatoire(c):
     paramètres: c une carte
     Cette fonction modifie la carte mais ne retourne rien    
     """
-    nb=randint(0,4)
-    for i in range(0,val):
-        tournerHoraire(c)
+    pass
 
 def coderMurs(c):
     """
@@ -250,16 +242,29 @@ def decoderMurs(c,code):
     paramètres c une carte
                code un entier codant les murs d'une carte
     Cette fonction modifie la carte mais ne retourne rien
-    """    
-
-
-
+    """
+    murs=[]
+    for i in reversed(range(4)):
+        print(i)
+        if code-2**i >=0:
+            code -=2**i
+            murs.append(True)
+        elif code-2**i<=0:
+            murs.append(False)
+    c["Nord"]=murs[3]
+    c["Est"]=murs[2]
+    c["Sud"]=murs[1]
+    c["Ouest"]=murs[0]
 def toChar(c):
     """
     fournit le caractère semi graphique correspondant à la carte (voir la variable listeCartes au début de ce script)
     paramètres c une carte
     """
-    pass
+    if listeCartes[coderMurs(c)]=='Ø':
+        return "Carte inexistante"
+    else:
+        return listeCartes[coderMurs(c)]
+    
 
 def passageNord(carte1,carte2):
     """
@@ -311,9 +316,4 @@ def passageEst(carte1,carte2):
 
 
 # python3 test... -v 
-# test_decoderMurs (__main__.TestCarte) ... FAIL
-# test_getTresor_mettreTresor (__main__.TestCarte) ... FAIL
-# test_possede_Pion (__main__.TestCarte) ... FAIL
-# test_possede_pendre_Pion (__main__.TestCarte) ... FAIL
-# test_possede_poser_Pion (__main__.TestCarte) ... FAIL
 # test_toChar (__main__.TestCarte) ... FAIL
