@@ -71,6 +71,39 @@ def setVal(matrice,ligne,colonne,valeur):
     matrice['val'][ligne * getNbColonnes(matrice) + colonne] = valeur
 
 
+#-----------------------------------------
+# Fonctions utiles au débuggage
+#-----------------------------------------
+
+def afficheLigneSeparatrice(matrice, tailleCellule=4):
+    """
+    Affichage d'une matrice
+    fonction annexe pour afficher les lignes séparatrices
+    """
+    print()
+    for i in range(getNbColonnes(matrice) + 1):
+        print('-' * tailleCellule + '+', end='')
+    print()
+
+
+def afficheMatrice(matrice, tailleCellule=4):
+    """
+    """
+    nbColonnes = getNbColonnes(matrice)
+    nbLignes = getNbLignes(matrice)
+    print(' ' * tailleCellule + '|', end='')
+    for i in range(nbColonnes):
+        print(str(i).center(tailleCellule) + '|', end='')
+    afficheLigneSeparatrice(matrice, tailleCellule)
+    for i in range(nbLignes):
+        print(str(i).rjust(tailleCellule) + '|', end='')
+        for j in range(nbColonnes):
+            print(str(getVal(matrice, i, j)).rjust(tailleCellule) + '|', end='')
+        afficheLigneSeparatrice(matrice, tailleCellule)
+    print()
+
+
+
 #------------------------------------------        
 # decalages
 #------------------------------------------
