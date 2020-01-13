@@ -17,7 +17,7 @@ import time
 
 class LabyrintheModeTexte(object):
     def __init__(self):
-        labyrinthe=None
+        labyrinthe = None
         
     def setLabyrinthe(self,labyrinthe):
         self.labyrinthe=labyrinthe
