@@ -27,7 +27,14 @@ def Carte( nord, est, sud, ouest, tresor=0, pions=[]):
     tresor est le numéro du trésor qui se trouve sur la carte (0 s'il n'y a pas de trésor)
     pions est la liste des pions qui sont posés sur la carte (un pion est un entier entre 1 et 4)
     """
-    Carte_drop = {"Nord":nord,"Est":est,"Sud":sud,"Ouest":ouest,"Trésor":tresor,"Pions":pions}
+    Carte_drop = {
+        "Nord":nord,
+        "Est":est,
+        "Sud":sud,
+        "Ouest":ouest,
+        "Trésor":tresor,
+        "Pions":pions}
+
     return Carte_drop
 
 def estValide(c):
@@ -39,7 +46,7 @@ def estValide(c):
         return True
     return False
 
-def murNord(c):
+def murNord(c):  # ok
     """
     retourne un booléen indiquant si la carte possède un mur au nord
     paramètre: c une carte
@@ -47,20 +54,21 @@ def murNord(c):
     
     return c["Nord"]
 
-def murSud(c):
+def murSud(c): # ok
     """
     retourne un booléen indiquant si la carte possède un mur au sud
     paramètre: c une carte
     """
     return c["Sud"]
 
-def murEst(c):
+def murEst(c):  # ok
     """
     retourne un booléen indiquant si la carte possède un mur à l'est
     paramètre: c une carte
     """
     return c["Est"]
-def murOuest(c):
+
+def murOuest(c):  # ok
     """
     retourne un booléen indiquant si la carte possède un mur à l'ouest
     paramètre: c une carte
@@ -85,7 +93,7 @@ def setListePions(c,listePions):
         if pion not in c["Pions"]:
             c["Pions"].append(pion)
 
-def getNbPions(c):
+def getNbPions(c): # ok 
     """
     retourne le nombre de pions se trouvant sur la carte
     paramètre: c une carte
@@ -104,7 +112,7 @@ def possedePion(c,pion):
         return False
 
 
-def getTresor(c):
+def getTresor(c):  # ok
     """
     retourne la valeur du trésor qui se trouve sur la carte (0 si pas de trésor)
     paramètre: c une carte
@@ -161,7 +169,7 @@ def poserPion(c, pion):
 
         
 
-def tournerHoraire(c):
+def tournerHoraire(c):  # ok
     """
     fait tourner la carte dans le sens horaire
     paramètres: c une carte
@@ -177,7 +185,8 @@ def tournerHoraire(c):
     c["Ouest"]=liste[3]
     
     #horaire=(nord,est,sud,ouest,c[4],c[5])
-def tournerAntiHoraire(c):
+
+def tournerAntiHoraire(c):  # ok
     """
     fait tourner la carte dans le sens anti-horaire
     paramètres: c une carte
@@ -269,3 +278,20 @@ def passageEst(carte1,carte2):
     if murOuest(carte1) and murEst(carte2):
         return True
     return False
+
+
+# python3 test... -v 
+# test_coderMurs (__main__.TestCarte) ... FAIL
+# test_decoderMurs (__main__.TestCarte) ... FAIL
+# test_estValide (__main__.TestCarte) ... FAIL
+# test_getTresor_mettreTresor (__main__.TestCarte) ... FAIL
+# test_getTresor_prendreTresor (__main__.TestCarte) ... ERROR
+# test_listePions (__main__.TestCarte) ... FAIL
+# test_passageEst (__main__.TestCarte) ... FAIL
+# test_passageNord (__main__.TestCarte) ... FAIL
+# test_passageOuest (__main__.TestCarte) ... FAIL
+# test_passageSud (__main__.TestCarte) ... FAIL
+# test_possede_Pion (__main__.TestCarte) ... FAIL
+# test_possede_pendre_Pion (__main__.TestCarte) ... FAIL
+# test_possede_poser_Pion (__main__.TestCarte) ... FAIL
+# test_toChar (__main__.TestCarte) ... FAIL
