@@ -121,7 +121,7 @@ def possedePion(c,pion):
     paramètres: c une carte
                 pion un entier compris entre 1 et 4
     """
-    return True if pion in c["Pions"] else False
+    return pion in c["Pions"]
 
 
 
@@ -231,8 +231,17 @@ def coderMurs(c):
     paramètre c une carte
     retourne un entier indice du caractère semi-graphique de la carte
     """
-    pass
-
+    nb=0
+    if murNord(c):
+        nb+=2**0
+    if murEst(c):
+        nb+=2**1
+    if murSud(c):
+        nb+=2**2
+    if murOuest(c):
+        nb+=2**3
+    return nb
+    
 def decoderMurs(c,code):
     """
     positionne les murs d'une carte en fonction du code décrit précédemment
@@ -298,11 +307,8 @@ def passageEst(carte1,carte2):
 
 
 # python3 test... -v 
-# test_coderMurs (__main__.TestCarte) ... FAIL
 # test_decoderMurs (__main__.TestCarte) ... FAIL
 # test_getTresor_mettreTresor (__main__.TestCarte) ... FAIL
-# test_getTresor_prendreTresor (__main__.TestCarte) ... ERROR
-# test_listePions (__main__.TestCarte) ... FAIL
 # test_possede_Pion (__main__.TestCarte) ... FAIL
 # test_possede_pendre_Pion (__main__.TestCarte) ... FAIL
 # test_possede_poser_Pion (__main__.TestCarte) ... FAIL
