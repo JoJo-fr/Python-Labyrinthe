@@ -47,30 +47,25 @@ def distribuerTresors(joueurs,nbTresors=24, nbTresorMax=0):
     """
     distribue de manière aléatoire des trésors entre les joueurs.
     paramètres: joueurs la liste des joueurs
-                nbTresors le nombre total de trésors à distribuer (on rappelle 
-                        que les trésors sont des entiers de 1 à nbTresors)
+                nbTresors le nombre total de trésors à distribuer (on rappelle que les trésors sont des entiers de 1 à nbTresors)   
                 nbTresorsMax un entier fixant le nombre maximum de trésor 
                              qu'un joueur aura après la distribution
                              si ce paramètre vaut 0 on distribue le maximum
                              de trésor possible  
     cette fonction ne retourne rien mais modifie la liste des joueurs
     """
-    for joueur in joueurs:
-        while len(joueur["Trésor"]) != nbTresorMax:
-            trésor_nb = random .randint(1, nbTresors)
-            if trésor_nb not in joueur["Trésor"]:
-                joueur["Trésor"].append(trésor_nb)
-    """
-    liste_trésor_pris = []
-    for J in range(len(joueurs)):
-        trésor = random.randint(1, nbTresors)
-        while len(joueurs[J]["Trésor"]) != nbTresorMax:
-            if trésor not in liste_trésor_pris or liste_trésor_pris == []:
-                joueurs[J]["Trésor"].append(trésor)
-                liste_trésor_pris.append(trésor)
-                trésor = random.randint(1, nbTresors)
-            trésor = random.randint(1, nbTresors)
-    """
+    deja_attribue = []
+    for x in range(len(joueurs)):
+        while len(joueurs[x]["Trésor"]) != nbTresorMax:
+            tresor_aleatoire = random.randint(1,nbTresors)
+            if tresor_aleatoire not in deja_attribue :
+                deja_attribue.append(tresor_aleatoire)
+
+                if tresor_aleatoire not in joueurs[x]["Trésor"]:
+                    joueurs[x]["Trésor"].append(tresor_aleatoire)
+
+   
+    
 def changerJoueurCourant(joueurs):
     """
     passe au joueur suivant (change le joueur courant donc)

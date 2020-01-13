@@ -8,8 +8,8 @@ import listeJoueurs
 import joueur
 class TestListeJoueurs(unittest.TestCase):
     def setUp(self):
-        self.liste_noms=[["test1","test2","test3","test4"],
-                          ["essai2","essai4"]]
+        self.liste_noms=[["test1","test2","test3","test4"],["essai2","essai4"]]
+                          
         
         
     def test_Joueur(self):
@@ -142,7 +142,7 @@ class TestListeJoueurs(unittest.TestCase):
                                  "\nCela peut provenir des fonctions ListeJoueurs, distribuerTresors ou nbTresorsRestantsJoueur")
     def test_joueurCourantAFini(self):
         for noms in self.liste_noms:
-            liste_joueurs=listeJoueurs.ListeJoueurs(noms)
+            liste_joueurs = listeJoueurs.ListeJoueurs(noms)
             for i in range(1,len(noms)+1):
                 self.assertTrue(listeJoueurs.joueurCourantAFini(liste_joueurs),"Le joueur courant de la liste "+
                                 str(liste_joueurs)+ " n'a aucun trésor la fonction joueurCourantAFini devrait retourner True"+
@@ -157,12 +157,5 @@ class TestListeJoueurs(unittest.TestCase):
                 listeJoueurs.changerJoueurCourant(liste_joueurs)
                 
 if __name__ == '__main__':
-    print("*"*50)
-    print("* ATTENTION! Note importante".ljust(48),"*")
-    print("* les tests ne peuvent s'effectuer avant".ljust(48),"*")
-    print("* d'avoir implémenté les fonctions ".ljust(48),"*")
-    print("*"," "*10,"- ListeJoueurs".ljust(35),"*")
-    print("*"," "*10,"- getNbJoueurs".ljust(35),"*")
-    print("*"," "*10,"- getJoueurCourant".ljust(35),"*")
-    print("*"*50)
+
     unittest.main()
