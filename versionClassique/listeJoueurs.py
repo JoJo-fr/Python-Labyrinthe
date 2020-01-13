@@ -21,6 +21,7 @@ def ListeJoueurs(nomsJoueurs):
     liste_joueur = []
     for nom in nomsJoueurs:
         liste_joueur.append((nom,[]))
+    print(liste_joueur)
     return liste_joueur
 
 def ajouterJoueur(joueurs, joueur):
@@ -35,7 +36,7 @@ def ajouterJoueur(joueurs, joueur):
 def initAleatoireJoueurCourant(joueurs):
     """
     tire au sort le joueur courant
-    paramètre: joueurs un liste de joueurs
+    paramètre: joueurs une liste de joueurs
     cette fonction ne retourne rien mais modifie la liste des joueurs
     """
     joueur_courant = joueurs.random.randint(0,len(joueurs))
@@ -69,7 +70,8 @@ def changerJoueurCourant(joueurs):
     passe au joueur suivant (change le joueur courant donc)
     paramètres: joueurs la liste des joueurs
     cette fonction ne retourne rien mais modifie la liste des joueurs
-    """   
+    """ 
+   
     joueur_suivant = joueurs[1]
     joueur_courant_remplacer = joueurs[0]
     del joueurs[0]
@@ -110,13 +112,14 @@ def nbTresorsRestantsJoueur(joueurs,numJoueur):
     """
     Nb_trésor = joueurs[numJoueur-1][1]
     return len(Nb_trésor)
+
 def numJoueurCourant(joueurs):
     """
     retourne le numéro du joueur courant
     paramètre: joueurs la liste des joueurs
     résultat: le numéro du joueur courant
     """ 
-    pass
+    return joueurs.index(getJoueurCourant(joueurs))+1
 
 def nomJoueurCourant(joueurs):
     """
