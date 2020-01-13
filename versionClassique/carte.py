@@ -217,7 +217,9 @@ def tourneAleatoire(c):
     paramètres: c une carte
     Cette fonction modifie la carte mais ne retourne rien    
     """
-    pass
+    nb=randint(0,4)
+    for i in range(0,val):
+        tournerHoraire(c)
 
 def coderMurs(c):
     """
@@ -249,7 +251,9 @@ def decoderMurs(c,code):
                code un entier codant les murs d'une carte
     Cette fonction modifie la carte mais ne retourne rien
     """    
-    pass
+
+
+
 def toChar(c):
     """
     fournit le caractère semi graphique correspondant à la carte (voir la variable listeCartes au début de ce script)
