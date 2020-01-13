@@ -32,9 +32,6 @@ def Matrice(nbLignes,nbColonnes,valeurParDefaut=0):
     else:
         return "Erreur, nbColones et nbLinges doivent etres positifs"
 
-
-
-
 def getNbLignes(matrice):
     """
     retourne le nombre de lignes de la matrice
