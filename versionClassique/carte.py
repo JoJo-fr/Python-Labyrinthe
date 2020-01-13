@@ -106,7 +106,7 @@ def setListePions(c,listePions):
                 listePions: la liste des pions à poser
     Cette fonction ne retourne rien mais modifie la carte
     """
-    c["¨Pions"]=listePions
+    c["Pions"]=listePions
 
 def getNbPions(c): # ok 
     """
@@ -152,7 +152,7 @@ def mettreTresor(c,tresor):
     résultat l'entier représentant le trésor qui était sur la carte
     """
     trésor_remplacé = c["Trésor"]
-    c["Trésor"] == tresor
+    c["Trésor"] = tresor
     return trésor_remplacé
 
 def prendrePion(c, pion):
@@ -162,11 +162,8 @@ def prendrePion(c, pion):
                 pion un entier compris entre 1 et 4
     Cette fonction modifie la carte mais ne retourne rien
     """
-    liste=list(c)
-    for i in range(len(liste[5])):
-        if liste[5][i]==pion:
-            del liste[5][i]
-    c=tuple(liste)
+    if pion in c["Pions"]:
+        c["Pions"].remove(pion)
 
 def poserPion(c, pion):
     """
@@ -175,10 +172,8 @@ def poserPion(c, pion):
                 pion un entier compris entre 1 et 4
     Cette fonction modifie la carte mais ne retourne rien
     """
-    liste=list(c)
-    if pion not in liste:
-        liste.append(pion)
-    c=tuple(liste)
+    if pion not in c["Pions"]:
+        c["Pions"].append(pion)
 
         
 
@@ -255,7 +250,11 @@ def toChar(c):
     fournit le caractère semi graphique correspondant à la carte (voir la variable listeCartes au début de ce script)
     paramètres c une carte
     """
-    pass
+    if listeCartes[coderMurs(c)]=='Ø':
+        return "Carte inexistante"
+    else:
+        return listeCartes[coderMurs(c)]
+    
 
 def passageNord(carte1,carte2):
     """
