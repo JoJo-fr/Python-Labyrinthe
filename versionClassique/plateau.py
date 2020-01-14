@@ -11,6 +11,7 @@
 
 from matrice import *
 from carte import *
+import random
 
 def Plateau(nbJoueurs, nbTresors): #modifier la génération de joueur
     """
