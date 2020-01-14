@@ -9,8 +9,6 @@
    Ce module gère les cartes du labyrinthe. 
 """
 import random
-
-
 """
 la liste des caractères semi-graphiques correspondant aux différentes cartes
 l'indice du caractère dans la liste correspond au codage des murs sur la carte
@@ -172,8 +170,6 @@ def poserPion(c, pion):
     """
     if pion not in c["Pions"]:
         c["Pions"].append(pion)
-
-        
 
 def tournerHoraire(c):  # ok
     """

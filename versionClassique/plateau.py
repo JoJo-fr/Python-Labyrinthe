@@ -25,16 +25,22 @@ def Plateau(nbJoueurs, nbTresors): #modifier la génération de joueur
     plateau = Matrice(7,7) # on créer le plateau 
     ligne_plateau = getNbLignes(plateau) # récupére le nombre de ligne de plateau
     colonne_plateau = getNbColonnes(plateau) # récupére le nombre de colonne de plateau
+    liste_trésor = []
+    liste_joueur = []
     
     for x in range(ligne_plateau):
         for y in range(colonne_plateau):
             trésor = random.randint(1,nbTresors) # génére de maniére aléatoire un numéro de trésor en tre 1 et nbTresor
+            #joueur = random.randint(1,4) # génére de maniére aléatoire un numéro de pion
             #génére une carte aléatoire avec un nombre aléatoire aléatoire d'un trésor (1 à nbTresor)
             #génére un joueur aléatoire
-            info_carte = Carte(bool(random.randint(0,1)),bool(random.randint(0,1)),bool(random.randint(0,1)),bool(random.randint(0,1)),random.randint(1,nbTresors),random.randint(1,4))
+            if trésor not in liste_trésor or liste_trésor == []:
+                info_carte = Carte(bool(random.randint(0,1)),bool(random.randint(0,1)),bool(random.randint(0,1)),bool(random.randint(0,1)),trésor)
             setVal(plateau,x,y,info_carte)
-    print(plateau)
-#Plateau(4,46) test
+            liste_trésor.append(trésor)
+            #liste_joueur.append(joueur)
+    print(plateau)  
+Plateau(4,46) #test
 
 def creerCartesAmovibles(tresorDebut,nbTresors):
     """
