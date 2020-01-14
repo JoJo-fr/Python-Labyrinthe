@@ -22,7 +22,7 @@ def Plateau(nbJoueurs, nbTresors): #modifier la génération de joueur
     créer un nouveau plateau contenant nbJoueurs et nbTrésors
     paramètres: nbJoueurs le nombre de joueurs (un nombre entre 1 et 4)
                 nbTresors le nombre de trésor à placer (un nombre entre 1 et 49)
-    resultat: un couple contenant
+    resultat: 
         - une matrice de taille 7x7 représentant un plateau de labyrinthe où les cartes ont été placée de manière aléatoire
         - la carte amovible qui n'a pas été placée sur le plateau
     """
@@ -52,6 +52,7 @@ def prendreTresorPlateau(plateau,lig,col,numTresor):
                 numTresor: le numéro du trésor à prendre sur la carte
     resultat: un booléen indiquant si le trésor était bien sur la carte considérée
     """
+    pass
 
 
 
@@ -63,6 +64,7 @@ def getCoordonneesJoueur(plateau,numJoueur):
     resultat: un couple d'entier donnant les coordonnées du joueur ou None si
               le joueur n'est pas sur le plateau
     """
+    pass
 
 
 def prendrePionPlateau(plateau,lin,col,numJoueur):
