@@ -28,14 +28,14 @@ def Labyrinthe(nomsJoueurs=["joueur1","joueurs2"],nbTresors=24, nbTresorsMax=0):
     labyrinthe_creer = {}
     ListeJoueur = []
 
-    ListeJoueur = ListeJoueurs(nomsJoueurs)
+    ListeJoueur_creer = nomsJoueurs
     distribuerTresors(ListeJoueur,nbTresors,nbTresorsMax)
-    initAleatoireJoueurCourant(joueur)
+    initAleatoireJoueurCourant(ListeJoueur)
 
     labyrinthe_creer["Joueurs"] = ListeJoueur
     labyrinthe_creer["labyrinthe"] = Plateau(getNbJoueurs(ListeJoueur),nbTresors)
     return labyrinthe_creer
-
+Labyrinthe(["joueur1","joueurs2"],24, 0)
 def getPlateau(labyrinthe):
     """
     retourne la matrice représentant le plateau de jeu
@@ -170,9 +170,6 @@ def jouerCarte(labyrinthe,direction,rangee):
     Cette fonction ne retourne pas de résultat mais mais à jour le labyrinthe
     """
     pass
-
-
-
 
 def tournerCarte(labyrinthe,sens='H'):
     """
