@@ -70,7 +70,7 @@ def distribuerTresors(joueurs,nbTresors=24, nbTresorMax=0):
 
    
     
-def changerJoueurCourant(joueurs): # à fixer
+def changerJoueurCourant(joueurs): 
     """
     passe au joueur suivant (change le joueur courant donc)
     paramètres: joueurs la liste des joueurs
@@ -96,7 +96,7 @@ def getJoueurCourant(joueurs):
     """
     return joueurs[0]
 
-def joueurCourantTrouveTresor(joueurs): # à fixer
+def joueurCourantTrouveTresor(joueurs):
     """
     Met à jour le joueur courant lorsqu'il a trouvé un trésor
     c-à-d enlève le trésor de sa liste de trésors à trouver
@@ -115,7 +115,7 @@ def nbTresorsRestantsJoueur(joueurs,numJoueur):
     """
     return getNbTresorsRestants(joueurs[numJoueur-1])
 
-def numJoueurCourant(joueurs): # à fixer
+def numJoueurCourant(joueurs):
     """
     retourne le numéro du joueur courant
     paramètre: joueurs la liste des joueurs
@@ -158,7 +158,7 @@ def tresorCourant(joueurs):
     """
     return joueurs["Trésor"]
 
-def joueurCourantAFini(joueurs): # à fixer
+def joueurCourantAFini(joueurs):
     """
     indique si le joueur courant a gagné
     paramètre: joueurs la liste des joueurs 
