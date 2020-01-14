@@ -170,7 +170,12 @@ def saisirDeplacement(lmt):
     paramètre: lmt: une vue texte de labyrinthe
     résultat: un couple d'entier (lin,col) indiquant les coordonnées de la case destination. Si l'utilisateur a entré des coordonnées incorrecte la fonction retourne (-1,-1)
     """    
-    pass
+    position=input("Veuillez entrer la position voulue sous la forme Ligne,Colonne")
+    val=position.split(",")
+    res=(int(val[0]),int(val[1]))
+    if (res[0]<0 or res[0]>6) or (res[1]<0 or res[1]>6):
+        return (-1,-1)
+    return (res[0],res[1])
         
 # demarre la partie en mode texte
 def demarrer(lmt):
