@@ -162,7 +162,15 @@ def saisirOrdre(lmt):
               c'est à dire le numéro de la ligne ou de la colonne où insérer la carte
               si l'ordre saisi n'est pas valide la focntion retourne (-1,-1)
     """
-    pass
+    choix=input("Tourner la carte(T) Ou Insérer la carte(N/E/S/O,RangeeVoulue)")
+    ordre=choix.split('T')
+    if ordre[0]=='T':
+        return ('T',None)
+    elif ordre[1]==1 or ordre[1]==3 or int(ordre[1])==5:
+        return (ordre[0],ordre[1])
+    print("Ordre invalide")
+    return (-1,-1)
+
 
 def saisirDeplacement(lmt):
     """
