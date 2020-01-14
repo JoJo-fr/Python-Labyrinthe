@@ -249,16 +249,17 @@ def decoderMurs(c,code):
     """
     murs = []
     for i in reversed(range(4)):
-        print(i)
         if code-2**i >= 0:
             code -= 2**i
             murs.append(True)
         elif code - 2**i <= 0:
             murs.append(False)
+
     c["Nord"] = murs[3]
     c["Est"] = murs[2]
     c["Sud"] = murs[1]
     c["Ouest"] = murs[0]
+    
 
 
 def toChar(c): #TODO
@@ -266,11 +267,26 @@ def toChar(c): #TODO
     fournit le caractère semi graphique correspondant à la carte (voir la variable listeCartes au début de ce script)
     paramètres c une carte
     """
-    if listeCartes[coderMurs(c)]=='Ø':
-        return "Carte inexistante"
-    else:
-        return listeCartes[coderMurs(c)]
-    
+   
+    #    if c["Nord"] == False and c["Ouest"] == False and c["Sud"] == False and c["Est"] == False:
+    #        return '╬'
+    #    elif c["Nord"] == True and c["Ouest"] == False and c["Sud"] == False and c["Est"] == False:
+    #    print("="*90)
+
+    # ['╦','╣','╗','╩','═','╝','╠','╔','║','╚']
+
+    """ if murEst(c) and murNord(c) and murOuest(c) and murSud(c):
+        return 'Ø'
+    elif not murEst(c) and not murNord(c) and not murOuest(c) and not murSud(c):
+        return '╬'
+
+    elif not murEst(c) and not murNord(c) and not murOuest(c) and not murSud(c):
+        return '╬' 
+    """
+
+    return listeCartes[coderMurs(c)]
+
+# '╦' : la carte {'Nord': True, 'Est': False, 'Sud': False, 'Ouest': False, 'Trésor': 0, 'Pions': [2]}
 
 def passageNord(carte1,carte2):
     """
