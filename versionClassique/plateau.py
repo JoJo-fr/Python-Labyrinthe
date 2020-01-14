@@ -22,8 +22,7 @@ cases_fixes = {
     str(Carte(False,False,False,True)) : [ # '╠' 
         (0,2),
         (0,4),
-        (2,2),
-     
+        (2,2), 
     ], 
     str(Carte(False,True,False,False)) : [ # '╣'
         (6,2),
@@ -45,10 +44,10 @@ cases_fixes = {
 
 les_coins = [
     # les posiotions des coins en x  y et la valeur 
-    (0,0,Carte(True,False,False,True)),
-    (0,6,Carte(True,True,False,False)),
-    (6,6,Carte(False,True,True,False)),
-    (6,0,Carte(True,False,True,True))
+    (0,0,Carte(True,False,False,True,0,[])),
+    (0,6,Carte(True,True,False,False,0,[])),
+    (6,6,Carte(False,True,True,False,0,[])),
+    (6,0,Carte(True,False,True,True,0,[]))
 ]
 
 
@@ -65,16 +64,21 @@ def Plateau(nbJoueurs, nbTresors): #modifier la génération de joueur
     le_plateau = Matrice(7,7,0)
 
     # j'ajoute les coins
+    compteur_joueur = 0
     for (x,y,val) in les_coins:
-        setVal(le_plateau,x,y,val)
+        if compteur_joueur < nbJoueurs:
+            compteur_joueur += 1
+            val["Pions"].append(compteur_joueur)
+            setVal(le_plateau,x,y,val)          
+        else:
+            setVal(le_plateau,x,y,val)
 
     # j'ajoute les cases fixes
     for (carte_fixe,liste_pos) in cases_fixes.items() :
         for (x,y) in liste_pos:
             setVal(le_plateau,x,y,carte_fixe)
-
-    
-
+    afficheMatrice(le_plateau)
+Plateau(4,49)
 
 def creerCartesAmovibles(tresorDebut,nbTresors):
     """
