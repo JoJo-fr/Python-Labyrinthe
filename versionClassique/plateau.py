@@ -48,7 +48,9 @@ def prendreTresorPlateau(plateau,lig,col,numTresor):
                 numTresor: le numéro du trésor à prendre sur la carte
     resultat: un booléen indiquant si le trésor était bien sur la carte considérée
     """
-    pass
+    if getVal(plateau,lig,col) == numTresor:
+        return True
+    return False
 
 def getCoordonneesTresor(plateau,numTresor):
     """
@@ -58,7 +60,13 @@ def getCoordonneesTresor(plateau,numTresor):
     resultat: un couple d'entier donnant les coordonnées du trésor ou None si
               le trésor n'est pas sur le plateau
     """
-    pass
+    ligne_plateau = getNLigne(plateau)
+    colonne_plateau = getNColonnes(plateau)
+    for x in ligne_plateau:
+        for y in colonne_plateau:
+            if getVal(plateau,x,y) == numTresor:
+                return (x,y)
+    return None
 
 def getCoordonneesJoueur(plateau,numJoueur):
     """
@@ -68,7 +76,13 @@ def getCoordonneesJoueur(plateau,numJoueur):
     resultat: un couple d'entier donnant les coordonnées du joueur ou None si
               le joueur n'est pas sur le plateau
     """
-    pass
+    ligne_plateau = getNLigne(plateau)
+    colonne_plateau = getNColonnes(plateau)
+    for x in ligne_plateau:
+        for y in colonne_plateau:
+            if getVal(plateau,x,y) == numJoueur:
+                return (x,y)
+    return None
 
 def prendrePionPlateau(plateau,lin,col,numJoueur):
     """
@@ -89,7 +103,7 @@ def poserPionPlateau(plateau,lin,col,numJoueur):
                 numJoueur: le numéro du joueur qui correspond au pion
     Cette fonction ne retourne rien mais elle modifie le plateau
     """
-    pass
+    setVal(plateau,lin,col,numJoueur)
 
 
 def accessible(plateau,ligD,colD,ligA,colA):
