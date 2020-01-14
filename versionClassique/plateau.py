@@ -22,12 +22,46 @@ def Plateau(nbJoueurs, nbTresors): #modifier la génération de joueur
     créer un nouveau plateau contenant nbJoueurs et nbTrésors
     paramètres: nbJoueurs le nombre de joueurs (un nombre entre 1 et 4)
                 nbTresors le nombre de trésor à placer (un nombre entre 1 et 49)
+<<<<<<< HEAD
     resultat: 
+=======
+    resultat: un couple contenant
+<<<<<<< Updated upstream
+>>>>>>> master
         - une matrice de taille 7x7 représentant un plateau de labyrinthe où les cartes ont été placée de manière aléatoire
         - la carte amovible qui n'a pas été placée sur le plateau
     """
     pass
 
+=======
+              - une matrice de taille 7x7 représentant un plateau de labyrinthe où les cartes
+                ont été placée de manière aléatoire
+              - la carte amovible qui n'a pas été placée sur le plateau
+    """
+    plateau = Matrice(7,7) # on créer le plateau 
+    ligne_plateau = getNbLignes(plateau) # récupére le nombre de ligne de plateau
+    colonne_plateau = getNbColonnes(plateau) # récupére le nombre de colonne de plateau
+    liste_tresor = []
+    #liste_joueur = []
+    
+    for x in range(ligne_plateau):
+        for y in range(colonne_plateau):
+            tresor = random.randint(1,nbTresors) # génére de maniére aléatoire un numéro de trésor en tre 1 et nbTresor
+            #joueur = random.randint(1,4) # génére de maniére aléatoire un numéro de pion
+            #génére une carte aléatoire avec un nombre aléatoire aléatoire d'un trésor (1 à nbTresor)
+            #génére un joueur aléatoire
+            if tresor not in liste_tresor or liste_tresor == []:
+                info_carte = Carte(bool(random.randint(0,1)), # Nord
+                                   bool(random.randint(0,1)), # Est
+                                   bool(random.randint(0,1)), # Sud
+                                   bool(random.randint(0,1)), # Ouest
+                                   tresor)
+            setVal(plateau,x,y,info_carte)
+            liste_tresor.append(tresor)
+    print(plateau) 
+    return plateau   
+Plateau(4,46)
+>>>>>>> Stashed changes
 
 def creerCartesAmovibles(tresorDebut,nbTresors):
     """
@@ -64,8 +98,21 @@ def getCoordonneesJoueur(plateau,numJoueur):
     resultat: un couple d'entier donnant les coordonnées du joueur ou None si
               le joueur n'est pas sur le plateau
     """
+<<<<<<< HEAD
     pass
+=======
+<<<<<<< Updated upstream
+>>>>>>> master
 
+=======
+    ligne_plateau = getNbLignes(plateau)
+    colonne_plateau = getNColonnes(plateau)
+    for x in ligne_plateau:
+        for y in colonne_plateau:
+            if getVal(plateau,x,y) == numJoueur:
+                return (x,y)
+    return None
+>>>>>>> Stashed changes
 
 def prendrePionPlateau(plateau,lin,col,numJoueur):
     """
@@ -87,7 +134,11 @@ def poserPionPlateau(plateau,lin,col,numJoueur):
                 numJoueur: le numéro du joueur qui correspond au pion
     Cette fonction ne retourne rien mais elle modifie le plateau
     """
+<<<<<<< Updated upstream
     pass
+=======
+    setVal(plateau,lin,col,numJoueur)
+>>>>>>> Stashed changes
 
 def accessible(plateau,ligD,colD,ligA,colA):
     """
