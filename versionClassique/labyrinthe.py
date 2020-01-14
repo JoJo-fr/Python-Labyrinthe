@@ -25,16 +25,16 @@ def Labyrinthe(nomsJoueurs=["joueur1","joueurs2"],nbTresors=24, nbTresorsMax=0):
                 nbTresorMax le nombre de trésors maximum distribué à chaque joueur
     résultat: le labyrinthe crée
     """
-    labyrinthe_créer = {}
+    labyrinthe_creer = {}
     ListeJoueur = []
 
     ListeJoueur = ListeJoueurs(nomsJoueurs)
-    distribuerTresor(ListeJoueur,nbTresors,nbTresorsMax)
+    distribuerTresors(ListeJoueur,nbTresors,nbTresorsMax)
     initAleatoireJoueurCourant(joueur)
 
-    labyrinthe_créer["Joueurs"]=ListeJoueur
-    labyrinthe_créer["labyrinthe"]=Plateau(getNbJoueurs(ListeJoueur),nbTresors)
-    return labyrinthe_créer
+    labyrinthe_creer["Joueurs"] = ListeJoueur
+    labyrinthe_creer["labyrinthe"] = Plateau(getNbJoueurs(ListeJoueur),nbTresors)
+    return labyrinthe_creer
 
 def getPlateau(labyrinthe):
     """
@@ -127,6 +127,7 @@ def prendreJoueurCourant(labyrinthe,lin,col):
     la fonction ne retourne rien mais modifie le labyrinthe    
     """
     pass
+
 def poserJoueurCourant(labyrinthe,lin,col):
     """
     pose le joueur courant sur la case lin,col du plateau
@@ -144,6 +145,7 @@ def getCarteAJouer(labyrinthe):
     résultat: la carte à jouer    
     """    
     pass
+
 def coupInterdit(labyrinthe,direction,rangee):
     """ 
     retourne True si le coup proposé correspond au coup interdit
@@ -179,7 +181,10 @@ def tournerCarte(labyrinthe,sens='H'):
                 sens: un caractère indiquant le sens dans lequel tourner la carte
      Cette fonction ne retourne pas de résultat mais mais à jour le labyrinthe    
     """
-    pass
+    if sens == 'H' :
+        tournerHoraire(getCarteAJouer(labyrinthe))
+    elif sens == 'A':
+        tournerAntiHoraire(getCarteAJouer(labyrinthe))
 
 def getTresorCourant(labyrinthe):
     """
