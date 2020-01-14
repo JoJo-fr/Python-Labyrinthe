@@ -23,8 +23,8 @@ def Plateau(nbJoueurs, nbTresors):
               - la carte amovible qui n'a pas été placée sur le plateau
     """
     plateau = Matrice(7,7) # on créer le plateau 
-
-
+    #print(plateau)
+Plateau(4,12)
 
 def creerCartesAmovibles(tresorDebut,nbTresors):
     """
@@ -94,6 +94,7 @@ def prendrePionPlateau(plateau,lin,col,numJoueur):
     Cette fonction ne retourne rien mais elle modifie le plateau
     """
     pass
+
 def poserPionPlateau(plateau,lin,col,numJoueur):
     """
     met le pion du joueur sur la carte qui se trouve en (lig,col) du plateau
@@ -117,7 +118,14 @@ def accessible(plateau,ligD,colD,ligA,colA):
     résultat: un boolean indiquant s'il existe un chemin entre la case de départ
               et la case d'arrivée
     """
-    pass
+    calque=Matrice(getNbLignes(plateau),getNbColonnes(plateau),0)
+    setVal(calque,ligD[0],colD[1],3)
+    matrice=True
+    while matrice==True:
+        matrice=marquageDirect(calque,plateau,3,3)
+    if getVal(calque,ligA[0]-1,colA[1]-1)==3:
+        return True
+    return False
 
 def accessibleDist(plateau,ligD,colD,ligA,colA):
     """

@@ -44,8 +44,6 @@ class LabyrintheGraphique(object):
         self.miseAjourParametres()
         self.afficheJeu()
         
-        
-
     def getImages(self,prefixImage="./images"):
         self.imagesCartes=[]
         

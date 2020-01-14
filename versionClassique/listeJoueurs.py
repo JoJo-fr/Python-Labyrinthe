@@ -68,7 +68,6 @@ def distribuerTresors(joueurs,nbTresors=24, nbTresorMax=0):
                 if tresor_aleatoire not in joueurs[x]["Trésor"]:
                     joueurs[x]["Trésor"].append(tresor_aleatoire)
 
-   
     
 def changerJoueurCourant(joueurs): 
     """
