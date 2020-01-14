@@ -27,7 +27,7 @@ def Plateau(nbJoueurs, nbTresors): #modifier la génération de joueur
     ligne_plateau = getNbLignes(plateau) # récupére le nombre de ligne de plateau
     colonne_plateau = getNbColonnes(plateau) # récupére le nombre de colonne de plateau
     liste_tresor = []
-
+    #liste_joueur = []
     
     for x in range(ligne_plateau):
         for y in range(colonne_plateau):
@@ -36,10 +36,10 @@ def Plateau(nbJoueurs, nbTresors): #modifier la génération de joueur
             #génére une carte aléatoire avec un nombre aléatoire aléatoire d'un trésor (1 à nbTresor)
             #génére un joueur aléatoire
             if tresor not in liste_tresor or liste_tresor == []:
-                info_carte = Carte(bool(random.randint(0,1)),\
-                                   bool(random.randint(0,1)),\
-                                   bool(random.randint(0,1)),\
-                                   bool(random.randint(0,1)),\
+                info_carte = Carte(bool(random.randint(0,1)), # Nord
+                                   bool(random.randint(0,1)), # Est
+                                   bool(random.randint(0,1)), # Sud
+                                   bool(random.randint(0,1)), # Ouest
                                    tresor)
             setVal(plateau,x,y,info_carte)
             liste_tresor.append(tresor)
@@ -175,4 +175,4 @@ def accessibleDist(plateau,ligD,colD,ligA,colA):
                 res.append((position))
                 valeur = getVal(plateau,x,y)
             if getVal(plateau,x,y) == getVal(plateau,ligA[0],colA[1]):
-                return retourner_liste(res)
+                return res
