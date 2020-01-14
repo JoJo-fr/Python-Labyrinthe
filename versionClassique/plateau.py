@@ -78,8 +78,8 @@ def Plateau(nbJoueurs, nbTresors): #modifier la génération de joueur
 
 def creerCartesAmovibles(tresorDebut,nbTresors):
     """
-    fonction utilitaire qui permet de créer les cartes amovibles du jeu en y positionnant aléatoirement nbTresor trésorsgetNbLigne
-    
+    fonction utilitaire qui permet de créer les cartes amovibles du jeu en y positionnant
+   aléatoirement nbTresor trésorsgetNbLigne
     la fonction retourne la liste, mélangée aléatoirement, des cartes ainsi créées
     paramètres: 
         tresorDebut: le numéro du premier trésor à créer
@@ -103,9 +103,10 @@ def prendreTresorPlateau(plateau,lig,col,numTresor):
                 numTresor: le numéro du trésor à prendre sur la carte
     resultat: un booléen indiquant si le trésor était bien sur la carte considérée
     """
-    pass
-
-
+    carte_info = getVal(plateau,lig,col)
+    if getVal(plateau,lig,col) == carte_info:
+        return True
+    return False
 
 def getCoordonneesJoueur(plateau,numJoueur):
     """
