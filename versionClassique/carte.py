@@ -205,13 +205,16 @@ def tournerAntiHoraire(c):  # ok
     c["Sud"]=liste[3]
     c["Ouest"]=liste[0]
 
-def tourneAleatoire(c):
+def tourneAleatoire(c): 
     """
     faire tourner la carte d'un nombre de tours aléatoire
     paramètres: c une carte
     Cette fonction modifie la carte mais ne retourne rien    
     """
-    pass
+    nb_tours = random.randint(1,4) # nombre de tours générer de facon aléatoire 
+    for i in range(nb_tours):
+        tournerAntiHoraire(c) # on tourne la carte dans le sens antihoraire i fois
+    
 
 def coderMurs(c):
     """
@@ -236,6 +239,7 @@ def coderMurs(c):
         nb+=2**3
     return nb
     
+
 def decoderMurs(c,code):
     """
     positionne les murs d'une carte en fonction du code décrit précédemment
@@ -243,19 +247,21 @@ def decoderMurs(c,code):
                code un entier codant les murs d'une carte
     Cette fonction modifie la carte mais ne retourne rien
     """
-    murs=[]
+    murs = []
     for i in reversed(range(4)):
         print(i)
-        if code-2**i >=0:
-            code -=2**i
+        if code-2**i >= 0:
+            code -= 2**i
             murs.append(True)
-        elif code-2**i<=0:
+        elif code - 2**i <= 0:
             murs.append(False)
-    c["Nord"]=murs[3]
-    c["Est"]=murs[2]
-    c["Sud"]=murs[1]
-    c["Ouest"]=murs[0]
-def toChar(c):
+    c["Nord"] = murs[3]
+    c["Est"] = murs[2]
+    c["Sud"] = murs[1]
+    c["Ouest"] = murs[0]
+
+
+def toChar(c): #TODO
     """
     fournit le caractère semi graphique correspondant à la carte (voir la variable listeCartes au début de ce script)
     paramètres c une carte
