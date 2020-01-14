@@ -17,6 +17,42 @@ import random
 import os 
 os.system("rm -rf __pycache__")
 
+
+cases_fixes = {
+    str(Carte(False,False,False,True)) : [ # '╠' 
+        (0,2),
+        (0,4),
+        (2,2),
+     
+    ], 
+    str(Carte(False,True,False,False)) : [ # '╣'
+        (6,2),
+        (6,4),
+        (4,4)
+    ],
+    str(Carte(True,False,False,False)) : [ # '╦'
+
+        (2,0),
+        (4,0),
+        (4,2)
+    ],
+    str(Carte(False,False,True,True))  : [ # '╩'
+        (2,6),
+        (4,6),
+        (2,4)
+    ] 
+}
+
+les_coins = [
+    # les posiotions des coins en x  y et la valeur 
+    (0,0,Carte(True,False,False,True)),
+    (0,6,Carte(True,True,False,False)),
+    (6,6,Carte(False,True,True,False)),
+    (6,0,Carte(True,False,True,True))
+]
+
+
+
 def Plateau(nbJoueurs, nbTresors): #modifier la génération de joueur
     """
     créer un nouveau plateau contenant nbJoueurs et nbTrésors
@@ -26,6 +62,17 @@ def Plateau(nbJoueurs, nbTresors): #modifier la génération de joueur
         - une matrice de taille 7x7 représentant un plateau de labyrinthe où les cartes ont été placée de manière aléatoire
         - la carte amovible qui n'a pas été placée sur le plateau
     """
+    le_plateau = Matrice(7,7,0)
+
+    # j'ajoute les coins
+    for (x,y,val) in les_coins:
+        setVal(le_plateau,x,y,val)
+
+    # j'ajoute les cases fixes
+    for (carte_fixe,liste_pos) in cases_fixes.items() :
+        for (x,y) in liste_pos:
+            setVal(le_plateau,x,y,carte_fixe)
+
     
 
 
@@ -40,6 +87,8 @@ def creerCartesAmovibles(tresorDebut,nbTresors):
     résultat: 
         la liste mélangée aléatoirement des cartes amovibles créees
     """
+    
+
     pass
 
 

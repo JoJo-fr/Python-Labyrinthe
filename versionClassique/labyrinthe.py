@@ -25,7 +25,16 @@ def Labyrinthe(nomsJoueurs=["joueur1","joueurs2"],nbTresors=24, nbTresorsMax=0):
                 nbTresorMax le nombre de trésors maximum distribué à chaque joueur
     résultat: le labyrinthe crée
     """
-    pass
+    labyrinthe_créer = {}
+    ListeJoueur = []
+
+    ListeJoueur = ListeJoueurs(nomsJoueurs)
+    distribuerTresor(ListeJoueur,nbTresors,nbTresorsMax)
+    initAleatoireJoueurCourant(joueur)
+
+    labyrinthe_créer["Joueurs"]=ListeJoueur
+    labyrinthe_créer["labyrinthe"]=Plateau(getNbJoueurs(ListeJoueur),nbTresors)
+    return labyrinthe_créer
 
 def getPlateau(labyrinthe):
     """
@@ -33,7 +42,7 @@ def getPlateau(labyrinthe):
     paramètre: labyrinthe le labyrinthe considéré
     résultat: la matrice représentant le plateau de ce labyrinthe
     """
-    return 
+    return labyrinthe["labyrinthe"]
 
 def getNbParticipants(labyrinthe):
     """
@@ -41,14 +50,16 @@ def getNbParticipants(labyrinthe):
     paramètre: labyrinthe le labyrinthe considéré
     résultat: le nombre de joueurs de la partie
     """
-    pass
+    return len(labyrinthe["Joueurs"])
+
 def getNomJoueurCourant(labyrinthe):
     """
     retourne le nom du joueur courant
     paramètre: labyrinthe le labyrinthe considéré
     résultat: le nom du joueurs courant
     """
-    pass
+    partie = labyrinthe["Joueurs"]
+    return getJoueurCourant[partie]
 
 def getNumJoueurCourant(labyrinthe):
     """
@@ -56,7 +67,8 @@ def getNumJoueurCourant(labyrinthe):
     paramètre: labyrinthe le labyrinthe considéré
     résultat: le numero du joueurs courant
     """
-    pass
+    partie = labyrinthe["Joueurs"]
+    return numJoueurCourant[partie]
 
 def getPhase(labyrinthe):
     """
@@ -65,7 +77,6 @@ def getPhase(labyrinthe):
     résultat: le numéro de la phase de jeu courante
     """   
     pass
-
 
 def changerPhase(labyrinthe):
     """
