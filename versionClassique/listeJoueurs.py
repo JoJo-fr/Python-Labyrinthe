@@ -42,8 +42,8 @@ def initAleatoireJoueurCourant(joueurs):
     paramètre: joueurs une liste de joueurs
     cette fonction ne retourne rien mais modifie la liste des joueurs
     """
-    joueur_courant = joueurs.random.randint(1,len(joueurs)-1)
-    joueur_choisie = joueurs[joueur_courant]
+    joueur_courant = random.randint(1,len(joueurs))
+    joueur_choisie = joueurs[joueur_courant-1]
     joueurs.pop(0)
     joueurs.append(joueur_choisie)
 

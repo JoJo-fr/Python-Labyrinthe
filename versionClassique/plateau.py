@@ -85,7 +85,7 @@ def Plateau(nbJoueurs, nbTresors): #modifier la génération de joueur
         for y in range(7):
             if getVal(le_plateau,x,y) == 0:
                     setVal(le_plateau,x,y,liste_carte_amovible[0][random.randint(1,32)])
-    afficheMatrice(le_plateau)
+    #afficheMatrice(le_plateau)
     return le_plateau
 
 def creerCartesAmovibles(tresorDebut,nbTresors):
@@ -129,7 +129,7 @@ def creerCartesAmovibles(tresorDebut,nbTresors):
                 liste_carte_amovible.append(carte)
     return liste_carte_amovible           
 
-def prendreTresorPlateau(plateau,lig,col,numTresor): # fonction pas
+def prendreTresorPlateau(plateau,lig,col,numTresor): # fonction à fixer
     """
     prend le tresor numTresor qui se trouve sur la carte en lin,col du plateau
     retourne True si l'opération s'est bien passée (le trésor était vraiment sur
@@ -156,17 +156,12 @@ def getCoordonneesJoueur(plateau,numJoueur):
     """
     index = -1
     matrice = plateau["val"]
-   
     for x in range(7):
         for y in range(7):
             index += 1
-            carte  = matrice[index]
-            
-            if carte["Pions"] == numJoueur:
+            if matrice[index]["Pions"][0] == numJoueur:
                 return (x,y)
     return None
-
-getCoordonneesJoueur(Plateau(4,49),4)
 
 def prendrePionPlateau(plateau,lin,col,numJoueur):
     """
@@ -177,7 +172,14 @@ def prendrePionPlateau(plateau,lin,col,numJoueur):
                 numJoueur: le numéro du joueur qui correspond au pion
     Cette fonction ne retourne rien mais elle modifie le plateau
     """
-    pass
+    index = -1
+    matrice = plateau["val"]
+    for x in range(7):
+        for y in range(7):
+            index += 1
+            if matrice[index]["Pions"][0] == numJoueur:
+                del matrice[index]["Pions"][0]
+                return 0
 
 def poserPionPlateau(plateau,lin,col,numJoueur):
     """
@@ -188,7 +190,14 @@ def poserPionPlateau(plateau,lin,col,numJoueur):
                 numJoueur: le numéro du joueur qui correspond au pion
     Cette fonction ne retourne rien mais elle modifie le plateau
     """
-    pass
+    index = -1
+    matrice = plateau["val"]
+    for x in range(7):
+        for y in range(7):
+            index += 1
+            if (x,y) == (lin,col):
+                matrice[index]["Pions"].append(numJoueur)
+                return 0
 
 def accessible(plateau,ligD,colD,ligA,colA):
     """
@@ -227,9 +236,12 @@ def getCoordonneesTresor(plateau,numTresor):
     resultat: un couple d'entier donnant les coordonnées du trésor ou None si
               le trésor n'est pas sur le plateau
     """
-    pass
-
-
-def test():
-    pass    
+    index = -1
+    matrice = plateau["val"]
+    for x in range(7):
+        for y in range(7):
+            index += 1
+            if matrice[index]["Trésor"] == numTresor:
+                return (x,y)
+    
  
