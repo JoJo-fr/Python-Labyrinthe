@@ -12,18 +12,19 @@
 from matrice import *
 from carte import *
 import random
+import ast # convert string to dict
 
 # a retirer 
+"""
 import os 
 os.system("rm -rf __pycache__")
-
+"""
 
 cases_fixes = {
     str(Carte(False,False,False,True)) : [ # '╠' 
         (0,2),
         (0,4),
-        (2,2),
-     
+        (2,2), 
     ], 
     str(Carte(False,True,False,False)) : [ # '╣'
         (6,2),
@@ -45,13 +46,11 @@ cases_fixes = {
 
 les_coins = [
     # les posiotions des coins en x  y et la valeur 
-    (0,0,Carte(True,False,False,True)),
-    (0,6,Carte(True,True,False,False)),
-    (6,6,Carte(False,True,True,False)),
-    (6,0,Carte(True,False,True,True))
+    (0,0,Carte(True,False,False,True,0,[])),
+    (0,6,Carte(True,True,False,False,0,[])),
+    (6,6,Carte(False,True,True,False,0,[])),
+    (6,0,Carte(True,False,True,True,0,[]))
 ]
-
-
 
 def Plateau(nbJoueurs, nbTresors): #modifier la génération de joueur
     """
@@ -62,37 +61,75 @@ def Plateau(nbJoueurs, nbTresors): #modifier la génération de joueur
         - une matrice de taille 7x7 représentant un plateau de labyrinthe où les cartes ont été placée de manière aléatoire
         - la carte amovible qui n'a pas été placée sur le plateau
     """
-    le_plateau = Matrice(7,7,0)
+    liste_carte_amovible = []
+    le_plateau = Matrice(7,7,0) # créer une matrice 
+    liste_carte_amovible.append(creerCartesAmovibles(1,nbTresors)) # ajout d'une liste de carte aleatoire
 
     # j'ajoute les coins
+    compteur_joueur = 0
     for (x,y,val) in les_coins:
-        setVal(le_plateau,x,y,val)
+        if compteur_joueur < nbJoueurs:
+            compteur_joueur += 1
+            val["Pions"].append(compteur_joueur)
+            setVal(le_plateau,x,y,val)          
+        else:
+            setVal(le_plateau,x,y,val)
 
     # j'ajoute les cases fixes
     for (carte_fixe,liste_pos) in cases_fixes.items() :
         for (x,y) in liste_pos:
-            setVal(le_plateau,x,y,carte_fixe)
+            setVal(le_plateau,x,y,ast.literal_eval(carte_fixe))
 
-    
-
+    # ajouter les cartes sur les case amovible
+    for x in range(7):
+        for y in range(7):
+            if getVal(le_plateau,x,y) == 0:
+                    setVal(le_plateau,x,y,liste_carte_amovible[0][random.randint(1,32)])
+    afficheMatrice(le_plateau)
+    return le_plateau
 
 def creerCartesAmovibles(tresorDebut,nbTresors):
     """
     fonction utilitaire qui permet de créer les cartes amovibles du jeu en y positionnant
-   aléatoirement nbTresor trésorsgetNbLigne
+    aléatoirement nbTresor trésorsgetNbLigne
     la fonction retourne la liste, mélangée aléatoirement, des cartes ainsi créées
     paramètres: 
-        tresorDebut: le numéro du premier trésor à créer
-        nbTresors: le nombre total de trésor à créer
-    résultat: 
-        la liste mélangée aléatoirement des cartes amovibles créees
+            tresorDebut: le numéro du premier trésor à créer
+            nbTresors: le nombre total de trésor à créer
+        résultat: 
+            la liste mélangée aléatoirement des cartes amovibles créees
     """
-    
+    liste_carte_amovible = []
+    liste_tresor = []
 
-    pass
+    if liste_carte_amovible == []: # premiére carte du jeux 
+        carte = Carte(bool(random.randint(0,1)), # Nord
+                                   bool(random.randint(0,1)), # Est
+                                   bool(random.randint(0,1)), # Sud
+                                   bool(random.randint(0,1)), # Ouest
+                                   tresorDebut)
+        liste_carte_amovible.append(carte)
+    for elem in range(33): # carte restante
+        while len(liste_carte_amovible) != nbTresors:
+            tresor_aléatoire = random.randint(1,nbTresors)
+            if tresor_aléatoire not in liste_tresor and liste_tresor != nbTresors:
+                 liste_tresor.append(tresor_aléatoire)
+                 carte = Carte(bool(random.randint(0,1)), # Nord
+                                       bool(random.randint(0,1)), # Est
+                                       bool(random.randint(0,1)), # Sud
+                                       bool(random.randint(0,1)), # Ouest
+                                       tresor_aléatoire)
+                 liste_carte_amovible.append(carte)
+            else: # si on dépasse le nombre de trésor 
+                carte = Carte(bool(random.randint(0,1)), # Nord
+                                       bool(random.randint(0,1)), # Est
+                                       bool(random.randint(0,1)), # Sud
+                                       bool(random.randint(0,1)), # Ouest
+                                       [])
+                liste_carte_amovible.append(carte)
+    return liste_carte_amovible           
 
-
-def prendreTresorPlateau(plateau,lig,col,numTresor):
+def prendreTresorPlateau(plateau,lig,col,numTresor): # fonction pas
     """
     prend le tresor numTresor qui se trouve sur la carte en lin,col du plateau
     retourne True si l'opération s'est bien passée (le trésor était vraiment sur
@@ -107,6 +144,7 @@ def prendreTresorPlateau(plateau,lig,col,numTresor):
     if getVal(plateau,lig,col) == carte_info:
         return True
     return False
+#prendreTresorPlateau(Plateau(4,4),0,0,1)
 
 def getCoordonneesJoueur(plateau,numJoueur):
     """
@@ -116,8 +154,19 @@ def getCoordonneesJoueur(plateau,numJoueur):
     resultat: un couple d'entier donnant les coordonnées du joueur ou None si
               le joueur n'est pas sur le plateau
     """
-    pass
+    index = -1
+    matrice = plateau["val"]
+   
+    for x in range(7):
+        for y in range(7):
+            index += 1
+            carte  = matrice[index]
+            
+            if carte["Pions"] == numJoueur:
+                return (x,y)
+    return None
 
+getCoordonneesJoueur(Plateau(4,49),4)
 
 def prendrePionPlateau(plateau,lin,col,numJoueur):
     """
