@@ -12,6 +12,7 @@
 from matrice import *
 from carte import *
 import random
+import ast # convert string to dict
 
 # a retirer 
 """
@@ -77,7 +78,7 @@ def Plateau(nbJoueurs, nbTresors): #modifier la génération de joueur
     # j'ajoute les cases fixes
     for (carte_fixe,liste_pos) in cases_fixes.items() :
         for (x,y) in liste_pos:
-            setVal(le_plateau,x,y,carte_fixe)
+            setVal(le_plateau,x,y,ast.literal_eval(carte_fixe))
 
     # ajouter les cartes sur les case amovible
     for x in range(7):
@@ -155,14 +156,16 @@ def getCoordonneesJoueur(plateau,numJoueur):
     """
     index = -1
     matrice = plateau["val"]
+   
     for x in range(7):
         for y in range(7):
             index += 1
             carte  = matrice[index]
-            print(carte["Pions"])
+            
             if carte["Pions"] == numJoueur:
                 return (x,y)
     return None
+
 getCoordonneesJoueur(Plateau(4,49),4)
 
 def prendrePionPlateau(plateau,lin,col,numJoueur):
