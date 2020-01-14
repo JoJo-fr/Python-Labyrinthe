@@ -12,7 +12,7 @@
 from matrice import *
 from carte import *
 
-def Plateau(nbJoueurs, nbTresors):
+def Plateau(nbJoueurs, nbTresors): #modifier la génération de joueur
     """
     créer un nouveau plateau contenant nbJoueurs et nbTrésors
     paramètres: nbJoueurs le nombre de joueurs (un nombre entre 1 et 4)
@@ -23,8 +23,18 @@ def Plateau(nbJoueurs, nbTresors):
               - la carte amovible qui n'a pas été placée sur le plateau
     """
     plateau = Matrice(7,7) # on créer le plateau 
-    #print(plateau)
-Plateau(4,12)
+    ligne_plateau = getNbLignes(plateau) # récupére le nombre de ligne de plateau
+    colonne_plateau = getNbColonnes(plateau) # récupére le nombre de colonne de plateau
+    
+    for x in range(ligne_plateau):
+        for y in range(colonne_plateau):
+            trésor = random.randint(1,nbTresors) # génére de maniére aléatoire un numéro de trésor en tre 1 et nbTresor
+            #génére une carte aléatoire avec un nombre aléatoire aléatoire d'un trésor (1 à nbTresor)
+            #génére un joueur aléatoire
+            info_carte = Carte(bool(random.randint(0,1)),bool(random.randint(0,1)),bool(random.randint(0,1)),bool(random.randint(0,1)),random.randint(1,nbTresors),random.randint(1,4))
+            setVal(plateau,x,y,info_carte)
+    print(plateau)
+#Plateau(4,46) test
 
 def creerCartesAmovibles(tresorDebut,nbTresors):
     """
@@ -141,4 +151,18 @@ def accessibleDist(plateau,ligD,colD,ligA,colA):
     résultat: une liste de coordonées indiquant un chemin possible entre la case
               de départ et la case d'arrivée
     """
-    pass
+    Ligne = getNbLignes(plateau)
+    Col = getNbColonnes(plateau)
+    res = []
+
+    for x in range(Ligne):
+        for y in range(Col):
+            position=((x,y))
+            if getVal(plateau,x,y) != 0 and len(res) == 0:
+                res.append((position))
+                valeur = getVal(plateau,x,y)
+            if getVal(plateau,x,y) != 0 and valeur - 1 == getVal(plateau,x,y):
+                res.append((position))
+                valeur = getVal(plateau,x,y)
+            if getVal(plateau,x,y) == getVal(plateau,ligA[0],colA[1]):
+                return retourner_liste(res)
