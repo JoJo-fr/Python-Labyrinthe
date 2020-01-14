@@ -33,7 +33,7 @@ def getPlateau(labyrinthe):
     paramètre: labyrinthe le labyrinthe considéré
     résultat: la matrice représentant le plateau de ce labyrinthe
     """
-    pass
+    return 
 
 def getNbParticipants(labyrinthe):
     """
@@ -42,7 +42,6 @@ def getNbParticipants(labyrinthe):
     résultat: le nombre de joueurs de la partie
     """
     pass
-
 def getNomJoueurCourant(labyrinthe):
     """
     retourne le nom du joueur courant

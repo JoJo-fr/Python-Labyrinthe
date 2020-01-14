@@ -31,7 +31,7 @@ def Matrice(nbLignes,nbColonnes,valeurParDefaut=0):
         return mat
     else:
         return "Erreur, nbColones et nbLinges doivent etres positifs"
-Matrice(7,7,0)
+
 def getNbLignes(matrice):
     """
     retourne le nombre de lignes de la matrice
@@ -152,6 +152,7 @@ def decalageColonneEnHaut(matrice, numCol, nouvelleValeur=0):
                  nouvelleValeur la valeur à placer
     résultat: la valeur de la case "ejectée" par le décalage
     """
+    
     matriceClone = matrice
     res = getVal(matrice, 0, numCol) # la valeur a exclure 
     for x in range(0,6):

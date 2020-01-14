@@ -13,12 +13,23 @@ from matrice import *
 from carte import *
 import random
 
+# a retirer 
+import os 
+os.system("rm -rf __pycache__")
+
 def Plateau(nbJoueurs, nbTresors): #modifier la génération de joueur
     """
     créer un nouveau plateau contenant nbJoueurs et nbTrésors
     paramètres: nbJoueurs le nombre de joueurs (un nombre entre 1 et 4)
                 nbTresors le nombre de trésor à placer (un nombre entre 1 et 49)
     resultat: un couple contenant
+<<<<<<< Updated upstream
+        - une matrice de taille 7x7 représentant un plateau de labyrinthe où les cartes ont été placée de manière aléatoire
+        - la carte amovible qui n'a pas été placée sur le plateau
+    """
+    pass
+
+=======
               - une matrice de taille 7x7 représentant un plateau de labyrinthe où les cartes
                 ont été placée de manière aléatoire
               - la carte amovible qui n'a pas été placée sur le plateau
@@ -43,19 +54,22 @@ def Plateau(nbJoueurs, nbTresors): #modifier la génération de joueur
                                    tresor)
             setVal(plateau,x,y,info_carte)
             liste_tresor.append(tresor)
-    print(plateau)  
-Plateau(4,46) #test
+    print(plateau) 
+    return plateau   
+Plateau(4,46)
+>>>>>>> Stashed changes
 
 def creerCartesAmovibles(tresorDebut,nbTresors):
     """
-    fonction utilitaire qui permet de créer les cartes amovibles du jeu en y positionnant
-    aléatoirement nbTresor trésors
+    fonction utilitaire qui permet de créer les cartes amovibles du jeu en y positionnant aléatoirement nbTresor trésorsgetNbLigne
+    
     la fonction retourne la liste, mélangée aléatoirement, des cartes ainsi créées
     paramètres: tresorDebut: le numéro du premier trésor à créer
                 nbTresors: le nombre total de trésor à créer
     résultat: la liste mélangée aléatoirement des cartes amovibles créees
     """
     pass
+
 
 def prendreTresorPlateau(plateau,lig,col,numTresor):
     """
@@ -68,25 +82,8 @@ def prendreTresorPlateau(plateau,lig,col,numTresor):
                 numTresor: le numéro du trésor à prendre sur la carte
     resultat: un booléen indiquant si le trésor était bien sur la carte considérée
     """
-    if getVal(plateau,lig,col) == numTresor:
-        return True
-    return False
 
-def getCoordonneesTresor(plateau,numTresor):
-    """
-    retourne les coordonnées sous la forme (lig,col) du trésor passé en paramètre
-    paramètres: plateau: le plateau considéré
-                numTresor: le numéro du trésor à trouver
-    resultat: un couple d'entier donnant les coordonnées du trésor ou None si
-              le trésor n'est pas sur le plateau
-    """
-    ligne_plateau = getNLigne(plateau)
-    colonne_plateau = getNColonnes(plateau)
-    for x in ligne_plateau:
-        for y in colonne_plateau:
-            if getVal(plateau,x,y) == numTresor:
-                return (x,y)
-    return None
+
 
 def getCoordonneesJoueur(plateau,numJoueur):
     """
@@ -96,13 +93,17 @@ def getCoordonneesJoueur(plateau,numJoueur):
     resultat: un couple d'entier donnant les coordonnées du joueur ou None si
               le joueur n'est pas sur le plateau
     """
-    ligne_plateau = getNLigne(plateau)
+<<<<<<< Updated upstream
+
+=======
+    ligne_plateau = getNbLignes(plateau)
     colonne_plateau = getNColonnes(plateau)
     for x in ligne_plateau:
         for y in colonne_plateau:
             if getVal(plateau,x,y) == numJoueur:
                 return (x,y)
     return None
+>>>>>>> Stashed changes
 
 def prendrePionPlateau(plateau,lin,col,numJoueur):
     """
@@ -124,8 +125,11 @@ def poserPionPlateau(plateau,lin,col,numJoueur):
                 numJoueur: le numéro du joueur qui correspond au pion
     Cette fonction ne retourne rien mais elle modifie le plateau
     """
+<<<<<<< Updated upstream
+    pass
+=======
     setVal(plateau,lin,col,numJoueur)
-
+>>>>>>> Stashed changes
 
 def accessible(plateau,ligD,colD,ligA,colA):
     """
@@ -138,14 +142,7 @@ def accessible(plateau,ligD,colD,ligA,colA):
     résultat: un boolean indiquant s'il existe un chemin entre la case de départ
               et la case d'arrivée
     """
-    calque=Matrice(getNbLignes(plateau),getNbColonnes(plateau),0)
-    setVal(calque,ligD[0],colD[1],3)
-    matrice=True
-    while matrice==True:
-        matrice=marquageDirect(calque,plateau,3,3)
-    if getVal(calque,ligA[0]-1,colA[1]-1)==3:
-        return True
-    return False
+    pass
 
 def accessibleDist(plateau,ligD,colD,ligA,colA):
     """
@@ -161,18 +158,19 @@ def accessibleDist(plateau,ligD,colD,ligA,colA):
     résultat: une liste de coordonées indiquant un chemin possible entre la case
               de départ et la case d'arrivée
     """
-    Ligne = getNbLignes(plateau)
-    Col = getNbColonnes(plateau)
-    res = []
+    pass
 
-    for x in range(Ligne):
-        for y in range(Col):
-            position=((x,y))
-            if getVal(plateau,x,y) != 0 and len(res) == 0:
-                res.append((position))
-                valeur = getVal(plateau,x,y)
-            if getVal(plateau,x,y) != 0 and valeur - 1 == getVal(plateau,x,y):
-                res.append((position))
-                valeur = getVal(plateau,x,y)
-            if getVal(plateau,x,y) == getVal(plateau,ligA[0],colA[1]):
-                return res
+def getCoordonneesTresor(plateau,numTresor):
+    """
+    retourne les coordonnées sous la forme (lig,col) du trésor passé en paramètre
+    paramètres: plateau: le plateau considéré
+                numTresor: le numéro du trésor à trouver
+    resultat: un couple d'entier donnant les coordonnées du trésor ou None si
+              le trésor n'est pas sur le plateau
+    """
+    pass
+
+
+def test():
+    pass    
+ 
