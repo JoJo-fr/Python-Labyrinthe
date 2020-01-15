@@ -84,7 +84,8 @@ def Plateau(nbJoueurs, nbTresors): #modifier la génération de joueur
     for x in range(7):
         for y in range(7):
             if getVal(le_plateau,x,y) == 0:
-                    setVal(le_plateau,x,y,liste_carte_amovible[0][random.randint(1,32)])
+                    # setVal(le_plateau,x,y,liste_carte_amovible[0][random.randint(1,32)])
+                    setVal(le_plateau,x,y,liste_carte_amovible[0][random.randint(1,len(liste_carte_amovible))])
     #afficheMatrice(le_plateau)
     return le_plateau
 

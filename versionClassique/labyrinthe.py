@@ -25,17 +25,30 @@ def Labyrinthe(nomsJoueurs=["joueur1","joueurs2"],nbTresors=24, nbTresorsMax=0):
                 nbTresorMax le nombre de trésors maximum distribué à chaque joueur
     résultat: le labyrinthe crée
     """
-    labyrinthe_creer = {}
+    """     labyrinthe_creer = {}
     ListeJoueur = []
 
     ListeJoueur_creer = nomsJoueurs
     distribuerTresors(ListeJoueur,nbTresors,nbTresorsMax)
     initAleatoireJoueurCourant(ListeJoueur)
 
-    labyrinthe_creer["Joueurs"] = ListeJoueur
+    labyrinthe_creer["joueurs"] = ListeJoueur
     labyrinthe_creer["labyrinthe"] = Plateau(getNbJoueurs(ListeJoueur),nbTresors)
-    return labyrinthe_creer
-Labyrinthe(["joueur1","joueurs2"],24, 0)
+    return labyrinthe_creer 
+    """
+
+    labyrinthe = {
+        "joueures" : nomsJoueurs,
+        "tresors" : nbTresors,
+        "tresorsmax" : nbTresorsMax,
+        "plateau" : Plateau(len(nomsJoueurs),nbTresors)
+
+    }
+
+    return labyrinthe
+
+    
+
 def getPlateau(labyrinthe):
     """
     retourne la matrice représentant le plateau de jeu
