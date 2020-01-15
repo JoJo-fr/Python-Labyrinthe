@@ -20,38 +20,6 @@ import os
 os.system("rm -rf __pycache__")
 """
 
-cases_fixes = {
-    str(Carte(False,False,False,True)) : [ # '╠' 
-        (0,2),
-        (0,4),
-        (2,2), 
-    ], 
-    str(Carte(False,True,False,False)) : [ # '╣'
-        (6,2),
-        (6,4),
-        (4,4)
-    ],
-    str(Carte(True,False,False,False)) : [ # '╦'
-
-        (2,0),
-        (4,0),
-        (4,2)
-    ],
-    str(Carte(False,False,True,True))  : [ # '╩'
-        (2,6),
-        (4,6),
-        (2,4)
-    ] 
-}
-
-les_coins = [
-    # les posiotions des coins en x  y et la valeur 
-    (0,0,Carte(True,False,False,True,0,[])),
-    (0,6,Carte(True,True,False,False,0,[])),
-    (6,6,Carte(False,True,True,False,0,[])),
-    (6,0,Carte(True,False,True,True,0,[]))
-]
-
 def Plateau(nbJoueurs, nbTresors): #modifier la génération de joueur
     """
     créer un nouveau plateau contenant nbJoueurs et nbTrésors
@@ -61,33 +29,67 @@ def Plateau(nbJoueurs, nbTresors): #modifier la génération de joueur
         - une matrice de taille 7x7 représentant un plateau de labyrinthe où les cartes ont été placée de manière aléatoire
         - la carte amovible qui n'a pas été placée sur le plateau
     """
-    liste_carte_amovible = []
-    le_plateau = Matrice(7,7,0) # créer une matrice 
-    liste_carte_amovible.append(creerCartesAmovibles(1,nbTresors)) # ajout d'une liste de carte aleatoire
+    dictionaire_plateau = {}
+    dictionaire_plateau["matrice"] = Matrice(7,7,0) # créer une matrice
+    dictionaire_plateau["joueurs"] = [nbJoueurs] # injecter une clé et valeur nbjoueur
 
-    # j'ajoute les coins
-    compteur_joueur = 0
-    for (x,y,val) in les_coins:
-        if compteur_joueur < nbJoueurs:
-            compteur_joueur += 1
-            val["Pions"].append(compteur_joueur)
-            setVal(le_plateau,x,y,val)          
-        else:
-            setVal(le_plateau,x,y,val)
+    liste_de_carte_amovible = creerCartesAmovibles(1,random.randint(1,45))
+    random.shuffle(liste_de_carte_amovible)
 
-    # j'ajoute les cases fixes
-    for (carte_fixe,liste_pos) in cases_fixes.items() :
-        for (x,y) in liste_pos:
-            setVal(le_plateau,x,y,ast.literal_eval(carte_fixe))
+    placement_carte(dictionaire_plateau,liste_de_carte_amovible) # injecter les carte fixe et amovible
 
-    # ajouter les cartes sur les case amovible
+def placement_carte(dictionaire_plateau,cartes):
+    """
+    cette fonction vas injecter les carte dans la matrice
+    """
+    index = -1
+
+    # ajouter toutes les cartes fixe sur le plateau
     for x in range(7):
         for y in range(7):
-            if getVal(le_plateau,x,y) == 0:
-                    # setVal(le_plateau,x,y,liste_carte_amovible[0][random.randint(1,32)])
-                    setVal(le_plateau,x,y,liste_carte_amovible[0][random.randint(1,len(liste_carte_amovible))])
-    #afficheMatrice(le_plateau)
-    return le_plateau
+            index += 1
+            if x == 0 and y == 0:
+                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,False,True,True,0,[])) # '╔'
+            if x == 0 and y == 6:
+                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,True,True,False,0,[])) # '╗'
+            if x == 6 and y == 0:
+                setVal(dictionaire_plateau["matrice"],x,y,Carte(True,False,False,True,0,[])) # '╗'
+            if x == 6 and y == 6:
+                setVal(dictionaire_plateau["matrice"],x,y,Carte(True,True,False,False,0,[])) # '╝'
+            if x == 0 and y == 2:
+                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,False,False,True,0,[])) # '╠'
+            if x == 0 and y == 4:
+                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,False,False,True,0,[])) # '╠'
+            if x == 2 and y == 2:
+                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,False,False,True,0,[])) # '╠'
+            if x == 6 and y == 2:
+                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,True,False,False,0,[])) # '╣'
+            if x == 6 and y == 4:
+                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,True,False,False,0,[])) # '╣'
+            if x == 4 and y == 4:
+                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,True,False,False,0,[])) # '╣'
+            if x == 2 and y == 0:
+                setVal(dictionaire_plateau["matrice"],x,y,Carte(True,False,False,False,0,[])) # '╦'
+            if x == 4 and y == 0:
+                setVal(dictionaire_plateau["matrice"],x,y,Carte(True,False,False,False,0,[])) # '╦'
+            if x == 4 and y == 2:
+                setVal(dictionaire_plateau["matrice"],x,y,Carte(True,False,False,False,0,[])) # '╦'
+            if x == 2 and y == 6:
+                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,False,True,True,0,[])) # '╩'
+            if x == 4 and y == 6:
+                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,False,True,True,0,[])) # '╩'
+            if x == 2 and y == 4:
+                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,False,True,True,0,[])) # '╩'
+    # ajouter les cartes amovible sur le plateau
+    print(cartes)
+    index = -1
+    for x in range(7):
+       for y in range(7):
+           if getVal(dictionaire_plateau["matrice"],x,y) == 0 and index != len(cartes):
+                index += 1
+                setVal(dictionaire_plateau["matrice"],x,y,cartes[index])
+    afficheMatrice(dictionaire_plateau["matrice"])
+    return dictionaire_plateau
 
 def creerCartesAmovibles(tresorDebut,nbTresors):
     """
@@ -101,56 +103,34 @@ def creerCartesAmovibles(tresorDebut,nbTresors):
             la liste mélangée aléatoirement des cartes amovibles créees
     """
     liste_carte_amovible = []
-    liste_tresor = []
-    compteur = 0 # carte à générer 12:'║', '╔':20, '╠':18
+    liste_trésors = []
+    index_trésor = -1
+    
+    #génére une liste de nombre, déplace aléatoirement les nombre dans la liste
+    for nb in range(tresorDebut + nbTresors):
+        liste_trésors.append(nb)
+    random.shuffle(liste_trésors)
 
-    if liste_carte_amovible == []: # premiére carte du jeux 
-        carte = Carte(False, # Nord
-                        False, # Est
-                        False, # Sud
-                        True, # Ouest
-                        tresorDebut) # '╠'
-
-        liste_carte_amovible.append(carte)
-    for elem in range(33): # carte restante
-        while len(liste_carte_amovible) != nbTresors:
-             tresor_aléatoire = random.randint(1,nbTresors)
-             if tresor_aléatoire not in liste_tresor and liste_tresor != nbTresors:
-                   liste_tresor.append(tresor_aléatoire)
-                   if compteur <= 20:
-                       compteur += 1
-                       carte = Carte(False, # Nord
-                                                False, # Est
-                                                True, # Sud
-                                                True, # Ouest
-                                                tresor_aléatoire) # '╔'
-                       liste_carte_amovible.append(carte)
-                   elif compteur > 20 and compteur <= 32:
-                        compteur += 1
-                        carte = Carte(True, # Nord
-                                                False, # Est
-                                                True, # Sud
-                                                False, # Ouest
-                                                tresor_aléatoire) # '║'
-                        liste_carte_amovible.append(carte)
-                   elif compteur > 32 and compteur <= 50:
-                        compteur += 1
-                        carte = Carte(True, # Nord
-                                                False, # Est
-                                                True, # Sud
-                                                True, # Ouest
-                                                tresor_aléatoire) # '╠'
-                        liste_carte_amovible.append(carte)
-                   """
-                   else: # si on dépasse le nombre de trésor 
-                        carte = Carte(bool(random.randint(0,1)), # Nord
-                                               bool(random.randint(0,1)), # Est
-                                               bool(random.randint(0,1)), # Sud
-                                               bool(random.randint(0,1)), # Ouest
-                                               [])
-                        liste_carte_amovible.append(carte)
-                    """ 
+    for carte in range(16):
+        index_trésor += 1
+        if index_trésor < len(liste_trésors):
+            liste_carte_amovible.append(Carte(False,False,True,False,liste_trésors[index_trésor],[])) # carte '╔'
+        else:
+            liste_carte_amovible.append(Carte(False,False,True,False,0,[]))
+    for carte in range(6):
+        index_trésor += 1
+        if index_trésor < len(liste_trésors):
+            liste_carte_amovible.append(Carte(False,False,True,False,liste_trésors[index_trésor],[])) # carte '╠'
+        else:
+            liste_carte_amovible.append(Carte(False,False,True,False,0,[]))
+    for carte in range(12):
+        index_trésor += 1
+        if index_trésor < len(liste_trésors):
+            liste_carte_amovible.append(Carte(True,False,True,False,liste_trésors[index_trésor],[])) # carte '║'
+        else:
+            liste_carte_amovible.append(Carte(False,False,True,False,0,[]))
     return liste_carte_amovible
+
 Plateau(4,49)
 def prendreTresorPlateau(plateau,lig,col,numTresor): # fonction à fixer
     """
