@@ -122,7 +122,7 @@ def numJoueurCourant(joueurs):
     joueur = joueurs[0]
     return joueur["Numero_joueur"]
 
-def nomJoueurCourant(joueurs): # à fixer
+def nomJoueurCourant(joueurs):
     """
     retourne le nom du joueur courant
     paramètre: joueurs la liste des joueurs

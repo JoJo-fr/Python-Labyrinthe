@@ -25,8 +25,8 @@ def Labyrinthe(nomsJoueurs=["joueur1","joueurs2"],nbTresors=24, nbTresorsMax=0):
                 nbTresorMax le nombre de trésors maximum distribué à chaque joueur
     résultat: le labyrinthe crée
     """
-<<<<<<< Updated upstream
-    """     labyrinthe_creer = {}
+    """     
+    labyrinthe_creer = {}
     ListeJoueur = []
 
     ListeJoueur_creer = nomsJoueurs
@@ -48,12 +48,8 @@ def Labyrinthe(nomsJoueurs=["joueur1","joueurs2"],nbTresors=24, nbTresorsMax=0):
 
     return labyrinthe
 
-    
+   
 
-=======
-    pass
-
->>>>>>> Stashed changes
 def getPlateau(labyrinthe):
     """
     retourne la matrice représentant le plateau de jeu
@@ -119,7 +115,7 @@ def getListeJoueurs(labyrinthe):
     paramètre: labyrinthe le labyrinthe considéré
     résultat: les joueurs sous la forme de la structure implémentée dans listeJoueurs.py    
     """
-    pass
+    return getListeJoueurs[labyrinthe["joueures"]]
 
 
 def enleverTresor(labyrinthe,lin,col,numTresor):
@@ -133,7 +129,7 @@ def enleverTresor(labyrinthe,lin,col,numTresor):
                 numTresor: le numéro du trésor à prendre sur la carte
     la fonction ne retourne rien mais modifie le labyrinthe
     """
-    
+    prendreTresorPlateau(labyrinthe,lin,col,numTresor)
 
 def prendreJoueurCourant(labyrinthe,lin,col):
     """
@@ -154,7 +150,7 @@ def poserJoueurCourant(labyrinthe,lin,col):
                 col: la colonne où se trouve la carte
     la fonction ne retourne rien mais modifie le labyrinthe     
     """
-    pass
+    prendrePionPlateau(labyrinthe,lin,col,getJoueurCourant(labyrinthe["joueures"]))
 
 def getCarteAJouer(labyrinthe):
     """
