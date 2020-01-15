@@ -33,29 +33,35 @@ def Plateau(nbJoueurs, nbTresors): #modifier la génération de joueur
     dictionaire_plateau["matrice"] = Matrice(7,7,0) # créer une matrice
     dictionaire_plateau["joueurs"] = [nbJoueurs] # injecter une clé et valeur nbjoueur
 
-    liste_de_carte_amovible = creerCartesAmovibles(1,random.randint(1,45))
-    random.shuffle(liste_de_carte_amovible)
+    liste_de_carte_amovible = creerCartesAmovibles(1,random.randint(1,45)) # génére une liste aléatoire de carte dans une liste
+    random.shuffle(liste_de_carte_amovible) # mélange les carte de maniérre aléatoire
 
-    placement_carte(dictionaire_plateau,liste_de_carte_amovible) # injecter les carte fixe et amovible
+    placement_carte(dictionaire_plateau,liste_de_carte_amovible,nbJoueurs) # injecter les carte fixe et amovible
+    return dictionaire_plateau
 
-def placement_carte(dictionaire_plateau,cartes):
+def placement_carte(dictionaire_plateau,cartes,nbJoueurs):
     """
     cette fonction vas injecter les carte dans la matrice
     """
     index = -1
-
     # ajouter toutes les cartes fixe sur le plateau
     for x in range(7):
         for y in range(7):
             index += 1
             if x == 0 and y == 0:
-                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,False,True,True,0,[])) # '╔'
+                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,False,True,True,0,[1])) # '╔'
             if x == 0 and y == 6:
-                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,True,True,False,0,[])) # '╗'
+                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,True,True,False,0,[2])) # '╗'
             if x == 6 and y == 0:
-                setVal(dictionaire_plateau["matrice"],x,y,Carte(True,False,False,True,0,[])) # '╗'
+                if nbJoueurs == 3: # si on à 3 joueurs alors placer le joueur 3
+                    setVal(dictionaire_plateau["matrice"],x,y,Carte(True,False,False,True,0,[3])) # '╗'
+                else:
+                    setVal(dictionaire_plateau["matrice"],x,y,Carte(True,False,False,True,0,[])) # '╗'
             if x == 6 and y == 6:
-                setVal(dictionaire_plateau["matrice"],x,y,Carte(True,True,False,False,0,[])) # '╝'
+                if nbJoueurs == 4: # si on à 4 joueurs alors placer le joueur 4
+                    setVal(dictionaire_plateau["matrice"],x,y,Carte(True,True,False,False,0,[4])) # '╝'
+                else:
+                    setVal(dictionaire_plateau["matrice"],x,y,Carte(True,True,False,False,0,[])) # '╝'
             if x == 0 and y == 2:
                 setVal(dictionaire_plateau["matrice"],x,y,Carte(False,False,False,True,0,[])) # '╠'
             if x == 0 and y == 4:
@@ -81,17 +87,16 @@ def placement_carte(dictionaire_plateau,cartes):
             if x == 2 and y == 4:
                 setVal(dictionaire_plateau["matrice"],x,y,Carte(False,False,True,True,0,[])) # '╩'
     # ajouter les cartes amovible sur le plateau
-    print(cartes)
     index = -1
     for x in range(7):
        for y in range(7):
            if getVal(dictionaire_plateau["matrice"],x,y) == 0 and index != len(cartes):
                 index += 1
                 setVal(dictionaire_plateau["matrice"],x,y,cartes[index])
-    afficheMatrice(dictionaire_plateau["matrice"])
+    #afficheMatrice(dictionaire_plateau["matrice"])
     return dictionaire_plateau
 
-def creerCartesAmovibles(tresorDebut,nbTresors):
+def creerCartesAmovibles(tresorDebut,nbTresors): # fonction valider
     """
     fonction utilitaire qui permet de créer les cartes amovibles du jeu en y positionnant
     aléatoirement nbTresor trésorsgetNbLigne
@@ -131,8 +136,8 @@ def creerCartesAmovibles(tresorDebut,nbTresors):
             liste_carte_amovible.append(Carte(False,False,True,False,0,[]))
     return liste_carte_amovible
 
-Plateau(4,49)
-def prendreTresorPlateau(plateau,lig,col,numTresor): # fonction à fixer
+#Plateau(4,49)
+def prendreTresorPlateau(plateau,lig,col,numTresor): # prendre un trésor signifie le retirer de la carte ?
     """
     prend le tresor numTresor qui se trouve sur la carte en lin,col du plateau
     retourne True si l'opération s'est bien passée (le trésor était vraiment sur
@@ -143,13 +148,14 @@ def prendreTresorPlateau(plateau,lig,col,numTresor): # fonction à fixer
                 numTresor: le numéro du trésor à prendre sur la carte
     resultat: un booléen indiquant si le trésor était bien sur la carte considérée
     """
-    carte_info = getVal(plateau,lig,col)
-    if getVal(plateau,lig,col) == carte_info:
+    labyrinthe = plateau["matrice"]
+    carte = getVal(labyrinthe,lig,col)
+    if getTresor(carte) == numTresor:
         return True
     return False
 #prendreTresorPlateau(Plateau(4,4),0,0,1)
 
-def getCoordonneesJoueur(plateau,numJoueur):
+def getCoordonneesJoueur(plateau,numJoueur): # fonction valider
     """
     retourne les coordonnées sous la forme (lig,col) du joueur passé en paramètre
     paramètres: plateau: le plateau considéré
@@ -157,12 +163,16 @@ def getCoordonneesJoueur(plateau,numJoueur):
     resultat: un couple d'entier donnant les coordonnées du joueur ou None si
               le joueur n'est pas sur le plateau
     """
-    matrice = plateau["val"]
+    index = -1
+    labyrinthe = plateau["matrice"]
+    matrice = labyrinthe["val"]
     for x in range(7):
         for y in range(7):
-            if numJoueur in getVal(matrice["matrice"],x,y):
+            index += 1
+            if possedePion(matrice[index],numJoueur) == True:
                 return (x,y)
     return None
+#getCoordonneesJoueur(Plateau(4,49),4)
 
 def prendrePionPlateau(plateau,lin,col,numJoueur):
     """
