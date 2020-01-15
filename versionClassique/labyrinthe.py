@@ -140,7 +140,7 @@ def prendreJoueurCourant(labyrinthe,lin,col):
                 col: la colonne où se trouve la carte
     la fonction ne retourne rien mais modifie le labyrinthe    
     """
-    pass
+    prendrePionPlateau(labyrinthe["Plateau"],lin,col,getJoueurCourant(labyrinthe["joueures"]))
 
 def poserJoueurCourant(labyrinthe,lin,col):
     """
@@ -150,7 +150,7 @@ def poserJoueurCourant(labyrinthe,lin,col):
                 col: la colonne où se trouve la carte
     la fonction ne retourne rien mais modifie le labyrinthe     
     """
-    prendrePionPlateau(labyrinthe,lin,col,getJoueurCourant(labyrinthe["joueures"]))
+    poserPionPlateau(labyrinthe["Plateau"],lin,col,getJoueurCourant(labyrinthe["joueures"]))
 
 def getCarteAJouer(labyrinthe):
     """
@@ -266,4 +266,10 @@ def finirTour(labyrinthe):
               1 si le joueur courant a trouvé un trésor mais la partie n'est pas terminée
               2 si le joueur courant a trouvé son dernier trésor (la partie est donc terminée)
     """
-    pass
+    if joueurCourantAFini(labyrinthe["Joueurs"][0]) == True:
+        return 2
+    elif joueurCourantAFini(labyrinthe["Joueurs"][0]) == False:
+        return 1
+    else:
+        return 0
+
