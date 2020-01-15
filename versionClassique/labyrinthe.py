@@ -25,6 +25,7 @@ def Labyrinthe(nomsJoueurs=["joueur1","joueurs2"],nbTresors=24, nbTresorsMax=0):
                 nbTresorMax le nombre de trésors maximum distribué à chaque joueur
     résultat: le labyrinthe crée
     """
+<<<<<<< Updated upstream
     """     labyrinthe_creer = {}
     ListeJoueur = []
 
@@ -49,6 +50,10 @@ def Labyrinthe(nomsJoueurs=["joueur1","joueurs2"],nbTresors=24, nbTresorsMax=0):
 
     
 
+=======
+    pass
+
+>>>>>>> Stashed changes
 def getPlateau(labyrinthe):
     """
     retourne la matrice représentant le plateau de jeu

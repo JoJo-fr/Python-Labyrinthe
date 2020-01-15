@@ -102,34 +102,56 @@ def creerCartesAmovibles(tresorDebut,nbTresors):
     """
     liste_carte_amovible = []
     liste_tresor = []
+    compteur = 0 # carte à générer 12:'║', '╔':20, '╠':18
 
     if liste_carte_amovible == []: # premiére carte du jeux 
-        carte = Carte(bool(random.randint(0,1)), # Nord
-                                   bool(random.randint(0,1)), # Est
-                                   bool(random.randint(0,1)), # Sud
-                                   bool(random.randint(0,1)), # Ouest
-                                   tresorDebut)
+        carte = Carte(False, # Nord
+                        False, # Est
+                        False, # Sud
+                        True, # Ouest
+                        tresorDebut) # '╠'
+
         liste_carte_amovible.append(carte)
     for elem in range(33): # carte restante
         while len(liste_carte_amovible) != nbTresors:
-            tresor_aléatoire = random.randint(1,nbTresors)
-            if tresor_aléatoire not in liste_tresor and liste_tresor != nbTresors:
-                 liste_tresor.append(tresor_aléatoire)
-                 carte = Carte(bool(random.randint(0,1)), # Nord
-                                       bool(random.randint(0,1)), # Est
-                                       bool(random.randint(0,1)), # Sud
-                                       bool(random.randint(0,1)), # Ouest
-                                       tresor_aléatoire)
-                 liste_carte_amovible.append(carte)
-            else: # si on dépasse le nombre de trésor 
-                carte = Carte(bool(random.randint(0,1)), # Nord
-                                       bool(random.randint(0,1)), # Est
-                                       bool(random.randint(0,1)), # Sud
-                                       bool(random.randint(0,1)), # Ouest
-                                       [])
-                liste_carte_amovible.append(carte)
-    return liste_carte_amovible           
-
+             tresor_aléatoire = random.randint(1,nbTresors)
+             if tresor_aléatoire not in liste_tresor and liste_tresor != nbTresors:
+                   liste_tresor.append(tresor_aléatoire)
+                   if compteur <= 20:
+                       compteur += 1
+                       carte = Carte(False, # Nord
+                                                False, # Est
+                                                True, # Sud
+                                                True, # Ouest
+                                                tresor_aléatoire) # '╔'
+                       liste_carte_amovible.append(carte)
+                   elif compteur > 20 and compteur <= 32:
+                        compteur += 1
+                        carte = Carte(True, # Nord
+                                                False, # Est
+                                                True, # Sud
+                                                False, # Ouest
+                                                tresor_aléatoire) # '║'
+                        liste_carte_amovible.append(carte)
+                   elif compteur > 32 and compteur <= 50:
+                        compteur += 1
+                        carte = Carte(True, # Nord
+                                                False, # Est
+                                                True, # Sud
+                                                True, # Ouest
+                                                tresor_aléatoire) # '╠'
+                        liste_carte_amovible.append(carte)
+                   """
+                   else: # si on dépasse le nombre de trésor 
+                        carte = Carte(bool(random.randint(0,1)), # Nord
+                                               bool(random.randint(0,1)), # Est
+                                               bool(random.randint(0,1)), # Sud
+                                               bool(random.randint(0,1)), # Ouest
+                                               [])
+                        liste_carte_amovible.append(carte)
+                    """ 
+    return liste_carte_amovible
+Plateau(4,49)
 def prendreTresorPlateau(plateau,lig,col,numTresor): # fonction à fixer
     """
     prend le tresor numTresor qui se trouve sur la carte en lin,col du plateau

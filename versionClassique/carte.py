@@ -312,7 +312,3 @@ def passageEst(carte1,carte2):
         return True
     else:
         return False
-
-
-# python3 test... -v 
-# test_toChar (__main__.TestCarte) ... FAIL
