@@ -157,12 +157,10 @@ def getCoordonneesJoueur(plateau,numJoueur):
     resultat: un couple d'entier donnant les coordonnées du joueur ou None si
               le joueur n'est pas sur le plateau
     """
-    index = -1
     matrice = plateau["val"]
     for x in range(7):
         for y in range(7):
-            index += 1
-            if matrice[index]["Pions"][0] == numJoueur:
+            if numJoueur in getVal(matrice["matrice"],x,y):
                 return (x,y)
     return None
 
@@ -175,14 +173,15 @@ def prendrePionPlateau(plateau,lin,col,numJoueur):
                 numJoueur: le numéro du joueur qui correspond au pion
     Cette fonction ne retourne rien mais elle modifie le plateau
     """
-    index = -1
     matrice = plateau["val"]
+    index = -1
     for x in range(7):
         for y in range(7):
-            index += 1
-            if matrice[index]["Pions"][0] == numJoueur:
-                del matrice[index]["Pions"][0]
-                return 0
+            if numJoueur in matrice["joueurs"]:
+                for joueur in matrice["joueurs"]:
+                    index += 1
+                    if joueur == numJoueur:
+                        del matrice["joueurs"][index]
 
 def poserPionPlateau(plateau,lin,col,numJoueur):
     """
@@ -213,7 +212,33 @@ def accessible(plateau,ligD,colD,ligA,colA):
     résultat: un boolean indiquant s'il existe un chemin entre la case de départ
               et la case d'arrivée
     """
-    pass
+    calque = Matrice(7, 7, -1)
+    count = 0
+    setVal(calque, ligD, colD, count)
+    case_voisine = [(ligD, colD)]
+    tester = [(ligD, colD)]
+    while len(tester) != 0 and (ligA, colA) not in case_voisine:
+        count += 1
+        li = []
+        for ligne, colone in tester:
+            nouveau = [(ligne-1,colone), (ligne+1,colone), (ligne,colone-1), (ligne,colone+1)]
+            nouveau = [(lig, col) for lig, col in nouveau if lig >= 0 and col >= 0 and lig <= getNbLignes(plateau) -1 and col <= getNbColonnes(plateau)-1 and (lig, col) not in case_voisine]
+            for lig, col in nouveau:
+                if lig == ligne-1 and passageNord(getVal(plateau, ligne, colone), getVal(plateau, lig, col)):
+                    li.append((lig, col))
+                    setVal(calque, lig, col, count)
+                if lig == ligne+1 and passageSud(getVal(plateau, ligne, colone), getVal(plateau, lig, col)):
+                    li.append((lig, col))
+                    setVal(calque, lig, col, count)                    
+                if col == colone-1 and passageOuest(getVal(plateau, ligne, colone), getVal(plateau, lig, col)):
+                    li.append((lig, col))
+                    setVal(calque, lig, col, count)
+                if col == colone+1 and passageEst(getVal(plateau, ligne, colone), getVal(plateau, lig, col)):
+                    li.append((lig, col))
+                    setVal(calque, lig, col, count)
+            case_voisine += li
+        tester = li
+    return (ligA, colA) in case_voisine
 
 def accessibleDist(plateau,ligD,colD,ligA,colA):
     """
