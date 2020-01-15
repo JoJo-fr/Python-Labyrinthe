@@ -53,12 +53,12 @@ def placement_carte(dictionaire_plateau,cartes,nbJoueurs):
             if x == 0 and y == 6:
                 setVal(dictionaire_plateau["matrice"],x,y,Carte(False,True,True,False,0,[2])) # '╗'
             if x == 6 and y == 0:
-                if nbJoueurs == 3: # si on à 3 joueurs alors placer le joueur 3
+                if nbJoueurs > 2: # si on à 3 joueurs alors placer le joueur 3
                     setVal(dictionaire_plateau["matrice"],x,y,Carte(True,False,False,True,0,[3])) # '╗'
                 else:
                     setVal(dictionaire_plateau["matrice"],x,y,Carte(True,False,False,True,0,[])) # '╗'
             if x == 6 and y == 6:
-                if nbJoueurs == 4: # si on à 4 joueurs alors placer le joueur 4
+                if nbJoueurs > 3: # si on à 4 joueurs alors placer le joueur 4
                     setVal(dictionaire_plateau["matrice"],x,y,Carte(True,True,False,False,0,[4])) # '╝'
                 else:
                     setVal(dictionaire_plateau["matrice"],x,y,Carte(True,True,False,False,0,[])) # '╝'
@@ -174,7 +174,7 @@ def getCoordonneesJoueur(plateau,numJoueur): # fonction valider
     return None
 #getCoordonneesJoueur(Plateau(4,49),4)
 
-def prendrePionPlateau(plateau,lin,col,numJoueur):
+def prendrePionPlateau(plateau,lin,col,numJoueur): # fonction valider
     """
     prend le pion du joueur sur la carte qui se trouve en (lig,col) du plateau
     paramètres: plateau:le plateau considéré
@@ -183,17 +183,13 @@ def prendrePionPlateau(plateau,lin,col,numJoueur):
                 numJoueur: le numéro du joueur qui correspond au pion
     Cette fonction ne retourne rien mais elle modifie le plateau
     """
-    matrice = plateau["val"]
-    index = -1
-    for x in range(7):
-        for y in range(7):
-            if numJoueur in matrice["joueurs"]:
-                for joueur in matrice["joueurs"]:
-                    index += 1
-                    if joueur == numJoueur:
-                        del matrice["joueurs"][index]
+    labyrinthe = plateau["matrice"]
+    carte = getVal(labyrinthe,lin,col)
+    prendrePion(carte,numJoueur)
 
-def poserPionPlateau(plateau,lin,col,numJoueur):
+#prendrePionPlateau(Plateau(4,5),0,6,2)
+
+def poserPionPlateau(plateau,lin,col,numJoueur): # fonction valider
     """
     met le pion du joueur sur la carte qui se trouve en (lig,col) du plateau
     paramètres: plateau:le plateau considéré
@@ -202,15 +198,11 @@ def poserPionPlateau(plateau,lin,col,numJoueur):
                 numJoueur: le numéro du joueur qui correspond au pion
     Cette fonction ne retourne rien mais elle modifie le plateau
     """
-    index = -1
-    matrice = plateau["val"]
-    for x in range(7):
-        for y in range(7):
-            index += 1
-            if (x,y) == (lin,col):
-                matrice[index]["Pions"].append(numJoueur)
-                return 0
+    labyrinthe = plateau["matrice"]
+    carte = getVal(labyrinthe,lin,col)
+    poserPion(carte,numJoueur)
 
+#poserPionPlateau(Plateau(3,45),6,6,8)
 def accessible(plateau,ligD,colD,ligA,colA):
     """
     indique si il y a un chemin entre la case ligD,colD et la case ligA,colA du labyrinthe
@@ -266,7 +258,7 @@ def accessibleDist(plateau,ligD,colD,ligA,colA):
     """
     pass
 
-def getCoordonneesTresor(plateau,numTresor):
+def getCoordonneesTresor(plateau,numTresor): # fonction valider
     """
     retourne les coordonnées sous la forme (lig,col) du trésor passé en paramètre
     paramètres: plateau: le plateau considéré
@@ -275,11 +267,14 @@ def getCoordonneesTresor(plateau,numTresor):
               le trésor n'est pas sur le plateau
     """
     index = -1
-    matrice = plateau["val"]
+    labyrinthe = plateau["matrice"]
     for x in range(7):
         for y in range(7):
             index += 1
-            if matrice[index]["Trésor"] == numTresor:
+            position = labyrinthe["val"][index]
+            if getTresor(position) == numTresor:
                 return (x,y)
+    return None
+#getCoordonneesTresor(Plateau(4,45),1)
     
  
