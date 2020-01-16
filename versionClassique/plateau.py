@@ -184,7 +184,7 @@ def prendrePionPlateau(plateau,lin,col,numJoueur): # fonction valider
     Cette fonction ne retourne rien mais elle modifie le plateau
     """
     labyrinthe = plateau["matrice"]
-    carte = getVal(labyrinthe,lin,col)
+    carte = getVal(labyrinthe["val"],lin,col)
     prendrePion(carte,numJoueur)
 
 #prendrePionPlateau(Plateau(4,5),0,6,2)
