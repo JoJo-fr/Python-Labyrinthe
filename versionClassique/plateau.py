@@ -48,40 +48,40 @@ def placement_carte(dictionaire_plateau,cartes,nbJoueurs):
             index += 1
             placementCarteAngle(x,y,dictionaire_plateau,nbJoueurs)
             if x == 0 and y == 2:
-                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,False,False,True,0,[])) # '╠'
+                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,True,True,True,0,[])) 
 
             if x == 0 and y == 4:
-                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,False,False,True,0,[])) # '╠'
+                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,True,True,True,0,[])) 
 
             if x == 2 and y == 2:
-                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,False,False,True,0,[])) # '╠'
+                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,False,False,True,0,[])) 
 
             if x == 6 and y == 2:
-                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,True,False,False,0,[])) # '╣'
+                setVal(dictionaire_plateau["matrice"],x,y,Carte(True,True,False,True,0,[])) 
 
             if x == 6 and y == 4:
-                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,True,False,False,0,[])) # '╣'
+                setVal(dictionaire_plateau["matrice"],x,y,Carte(True,True,False,True,0,[])) 
 
             if x == 4 and y == 4:
-                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,True,False,False,0,[])) # '╣'
+                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,True,False,False,0,[])) 
 
             if x == 2 and y == 0:
-                setVal(dictionaire_plateau["matrice"],x,y,Carte(True,False,False,False,0,[])) # '╦'
+                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,False,False,True,0,[])) 
 
             if x == 4 and y == 0:
-                setVal(dictionaire_plateau["matrice"],x,y,Carte(True,False,False,False,0,[])) # '╦'
+                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,False,False,True,0,[])) 
 
             if x == 4 and y == 2:
-                setVal(dictionaire_plateau["matrice"],x,y,Carte(True,False,False,False,0,[])) # '╦'
+                setVal(dictionaire_plateau["matrice"],x,y,Carte(True,False,False,False,0,[])) 
 
             if x == 2 and y == 6:
-                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,False,True,True,0,[])) # '╩'
+                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,True,False,False,0,[]))
 
             if x == 4 and y == 6:
-                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,False,True,True,0,[])) # '╩'
+                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,True,False,False,0,[]))
 
             if x == 2 and y == 4:
-                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,False,True,True,0,[])) # '╩'
+                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,False,True,True,0,[]))
 
     # ajouter les cartes amovible sur le plateau
     index = -1
@@ -90,7 +90,6 @@ def placement_carte(dictionaire_plateau,cartes,nbJoueurs):
            if getVal(dictionaire_plateau["matrice"],x,y) == 0 and index != len(cartes):
                 index += 1
                 setVal(dictionaire_plateau["matrice"],x,y,cartes[index])
-    #afficheMatrice(dictionaire_plateau["matrice"])
     return dictionaire_plateau
 
 def placementCarteAngle(x,y,dictionaire_plateau,nbJoueurs):
