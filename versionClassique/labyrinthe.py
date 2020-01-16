@@ -184,7 +184,20 @@ def jouerCarte(labyrinthe,direction,rangee):
                 rangee: le numéro de la ligne ou de la colonne choisie
     Cette fonction ne retourne pas de résultat mais mais à jour le labyrinthe
     """
-    pass
+    impossible=[None]
+    CoupAutorisé=True
+    if coupInterdit(labyrinthe,direction,rangee) or (direction in impossible and rangee in impossible):
+        CoupAutorisé=False
+    if CoupAutorisé:
+        if direction=='O':
+            labyrinthe[1]=decalageLigneADroite(labyrinthe[0]["matrice"], int(rangee), labyrinthe[1])
+        if direction=='E':
+            labyrinthe[1]=decalageLigneAGauche(labyrinthe[0]["matrice"], int(rangee), labyrinthe[1])
+        if direction=='N':
+            labyrinthe[1]=decalageColonneEnBas(labyrinthe[0]["matrice"], int(rangee), labyrinthe[1])
+        if direction=='S':
+            labyrinthe[1]=decalageColonneEnHaut(labyrinthe[0]["matrice"], int(rangee), labyrinthe[1])
+
 
 def tournerCarte(labyrinthe,sens='H'):
     """
