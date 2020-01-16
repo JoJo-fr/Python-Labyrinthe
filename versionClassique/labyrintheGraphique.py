@@ -16,7 +16,10 @@ import time
 import sys
 import os
 
-       
+pygame.mixer.init()
+son = pygame.mixer.music.load('Brawl Stars OST - Menu (152kbit_Opus).ogg')
+son.play(loops=-1, maxtime=0, fade_ms=0)
+
 AUCUNE=0
 ALPHA=1
 NUMERIQUE=2
@@ -26,8 +29,6 @@ class LabyrintheGraphique(object):
 
     def __init__(self, labyrinthe, titre='Labyrinthe des IUT', size=(1000, 800), couleur=(209,238,238),prefixeImage="./images"):
         """Method docstring."""
-        pygame.mixer.music.load('son.wav')
-        pygame.mixer.music.play()
         self.messageInfo=None
         self.imgInfo=None
         self.labyrinthe=labyrinthe
