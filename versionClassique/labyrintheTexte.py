@@ -79,12 +79,10 @@ def afficheLabyrinthe(lmt,message="",sauts=0):
     listeJoueurs=getListeJoueurs(labyrinthe)
     print('Cartes restantes : ')
     for i in range(1,getNbParticipants(labyrinthe)+1):
-        pcouleur( nomJoueur(listeJoueurs,i) +' '+ str(nbTresorsRestantsJoueur(listeJoueurs,i))+' ',i)
+        pcouleur(nomJoueur(listeJoueurs,i).ljust(10)+' '+str(nbTresorsRestantsJoueur(listeJoueurs,i))+' ',i)
         print()
     print()
     print("C'est au tour de ",end='')
-    print(nomJoueurCourant(listeJoueurs))
-    print(numJoueurCourant(listeJoueurs))
     pcouleur(nomJoueurCourant(listeJoueurs),numJoueurCourant(listeJoueurs))
     print(" de jouer")
     tresor=tresorCourant(listeJoueurs)
@@ -164,15 +162,7 @@ def saisirOrdre(lmt):
               c'est à dire le numéro de la ligne ou de la colonne où insérer la carte
               si l'ordre saisi n'est pas valide la focntion retourne (-1,-1)
     """
-    choix=input("Tourner la carte(T) Ou Insérer la carte(N/E/S/O,RangeeVoulue)")
-    ordre=choix.split('T')
-    if ordre[0]=='T':
-        return ('T','T')
-    elif int(ordre[1])==1 or int(ordre[1])==3 or int(ordre[1])==5:
-        return (ordre[0],ordre[1])
-    print("Ordre invalide")
-    return (-1,-1)
-
+    pass
 
 def saisirDeplacement(lmt):
     """
@@ -180,12 +170,7 @@ def saisirDeplacement(lmt):
     paramètre: lmt: une vue texte de labyrinthe
     résultat: un couple d'entier (lin,col) indiquant les coordonnées de la case destination. Si l'utilisateur a entré des coordonnées incorrecte la fonction retourne (-1,-1)
     """    
-    position=input("Veuillez entrer la position voulue sous la forme Ligne,Colonne")
-    val=position.split(",")
-    res=(int(val[0]),int(val[1]))
-    if (res[0]<0 or res[0]>6) or (res[1]<0 or res[1]>6):
-        return (-1,-1)
-    return (res[0],res[1])
+    pass
         
 # demarre la partie en mode texte
 def demarrer(lmt):

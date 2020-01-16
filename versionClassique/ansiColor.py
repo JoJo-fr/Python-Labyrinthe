@@ -39,5 +39,4 @@ def pcouleur(texte,couleurCar=9,couleurFond=9,style=0):
          couleurFond: un entier indiquant la couleur du fond (noir par défaut)
          style: un entier indiquant le style de la police (gras, italique etc.)
      """
-     print(texte)
-     print("\x1b["+str(style)+";"+str(30+9)+";"+str(40+couleurFond)+"m"+texte+fin,sep='',end='')
+     print("\x1b["+str(style)+";"+str(30+couleurCar["Numéro_joueur"])+";"+str(40+couleurFond)+"m"+texte+fin,sep='',end='')
