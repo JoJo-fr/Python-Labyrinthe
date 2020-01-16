@@ -39,8 +39,8 @@ def getPlateau(labyrinthe):
     résultat: la matrice représentant le plateau de ce labyrinthe
     """
     plateau = labyrinthe["matrice"]
-    return plateau["val"]
-
+    return plateau
+    
 def getNbParticipants(labyrinthe):
     """
     retourne le nombre de joueurs engagés dans la partie

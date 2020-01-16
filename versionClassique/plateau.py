@@ -12,13 +12,11 @@
 from matrice import *
 from carte import *
 import random
-import ast # convert string to dict
 
-# a retirer 
-"""
+
 import os 
 os.system("rm -rf __pycache__")
-"""
+
 
 def Plateau(nbJoueurs, nbTresors): #modifier la génération de joueur
     """
@@ -184,7 +182,7 @@ def prendrePionPlateau(plateau,lin,col,numJoueur): # fonction valider
     Cette fonction ne retourne rien mais elle modifie le plateau
     """
     labyrinthe = plateau["matrice"]
-    carte = getVal(labyrinthe["val"],lin,col)
+    carte = getVal(labyrinthe,lin,col)
     prendrePion(carte,numJoueur)
 
 #prendrePionPlateau(Plateau(4,5),0,6,2)
@@ -202,7 +200,38 @@ def poserPionPlateau(plateau,lin,col,numJoueur): # fonction valider
     carte = getVal(labyrinthe,lin,col)
     poserPion(carte,numJoueur)
 
-#poserPionPlateau(Plateau(3,45),6,6,8)
+
+def marquageDirect(calque,plateau,val,marque):
+
+    calque = Matrice(7,7)
+
+    res=False
+    nb_lignes = 7
+    nb_Cols = 7
+    for l in range(nb_lignes):
+        for c in range(nb_Cols):
+            if getVal(calque,l,c) == 0: # je ne suis pas marqué
+                carte_actuelle = getVal(plateau["matrice"],l,c)
+                if murEst(carte_actuelle) == True and murOuest(carte_actuelle) == True and murNord(carte_actuelle) == True and murSud(carte_actuelle) == True: 
+                    if l > 0 and getVal(calque,l-1,c) == val: # mon voisin du haut est marqué
+                        setVal(calque,l,c,marque)
+                        res = True
+                    elif l < nb_lignes-1 and getVal(calque,l+1,c) == val:# mon voisin du bas est marqué
+                        setVal(calque,l,c,marque)
+                        res = True
+                    elif c > 0 and getVal(calque,l,c-1) == val: # mon voisin de gauche est marqué
+                        setVal(calque,l,c,marque)
+                        res = True
+                    elif c < nb_Cols-1 and getVal(calque,l,c+1) == val:# mon voisin de droite est marqué
+                        setVal(calque,l,c,marque)
+                        res = True
+    return res
+    
+
+
+
+
+
 def accessible(plateau,ligD,colD,ligA,colA):
     """
     indique si il y a un chemin entre la case ligD,colD et la case ligA,colA du labyrinthe
@@ -214,33 +243,15 @@ def accessible(plateau,ligD,colD,ligA,colA):
     résultat: un boolean indiquant s'il existe un chemin entre la case de départ
               et la case d'arrivée
     """
-    calque = Matrice(7, 7, -1)
-    count = 0
-    setVal(calque, ligD, colD, count)
-    case_voisine = [(ligD, colD)]
-    tester = [(ligD, colD)]
-    while len(tester) != 0 and (ligA, colA) not in case_voisine:
-        count += 1
-        li = []
-        for ligne, colone in tester:
-            nouveau = [(ligne-1,colone), (ligne+1,colone), (ligne,colone-1), (ligne,colone+1)]
-            nouveau = [(lig, col) for lig, col in nouveau if lig >= 0 and col >= 0 and lig <= getNbLignes(plateau) -1 and col <= getNbColonnes(plateau)-1 and (lig, col) not in case_voisine]
-            for lig, col in nouveau:
-                if lig == ligne-1 and passageNord(getVal(plateau, ligne, colone), getVal(plateau, lig, col)):
-                    li.append((lig, col))
-                    setVal(calque, lig, col, count)
-                if lig == ligne+1 and passageSud(getVal(plateau, ligne, colone), getVal(plateau, lig, col)):
-                    li.append((lig, col))
-                    setVal(calque, lig, col, count)                    
-                if col == colone-1 and passageOuest(getVal(plateau, ligne, colone), getVal(plateau, lig, col)):
-                    li.append((lig, col))
-                    setVal(calque, lig, col, count)
-                if col == colone+1 and passageEst(getVal(plateau, ligne, colone), getVal(plateau, lig, col)):
-                    li.append((lig, col))
-                    setVal(calque, lig, col, count)
-            case_voisine += li
-        tester = li
-    return (ligA, colA) in case_voisine
+    calque = Matrice(7,7,0)
+    setVal(calque,ligD,colD,3)
+    matrice=True
+    while matrice==True:
+        matrice=marquageDirect(calque,plateau["matrice"],3,3)
+    if getVal(calque,ligA-1,colD-1)==3:
+        return True
+    return False
+    
 
 def accessibleDist(plateau,ligD,colD,ligA,colA):
     """
