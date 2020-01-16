@@ -79,7 +79,7 @@ def afficheLabyrinthe(lmt,message="",sauts=0):
     listeJoueurs=getListeJoueurs(labyrinthe)
     print('Cartes restantes : ')
     for i in range(1,getNbParticipants(labyrinthe)+1):
-        pcouleur(nomJoueur(listeJoueurs,i).ljust(10)+' '+str(nbTresorsRestantsJoueur(listeJoueurs,i))+' ',i)
+        pcouleur( nomJoueur(listeJoueurs,i) +' '+ str(nbTresorsRestantsJoueur(listeJoueurs,i))+' ',i)
         print()
     print()
     print("C'est au tour de ",end='')

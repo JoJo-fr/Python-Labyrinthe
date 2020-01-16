@@ -28,6 +28,7 @@ def Labyrinthe(nomsJoueurs=["joueur1","joueurs2"],nbTresors=24, nbTresorsMax=0):
     joueurs = ListeJoueurs(nomsJoueurs) # structure des joueurs 
     distribuerTresors(joueurs,nbTresors,nbTresorsMax) # distribuer les trésors au joueurs
     partie = Plateau(getNbJoueurs(joueurs),nbTresors) # créer la partie 
+    partie["liste_joueurs"] = joueurs
     return partie
 
 Labyrinthe(nomsJoueurs=["joueur1","joueurs2"],nbTresors=24, nbTresorsMax=0)
@@ -64,7 +65,7 @@ def getNumJoueurCourant(labyrinthe):
     paramètre: labyrinthe le labyrinthe considéré
     résultat: le numero du joueurs courant
     """
-    partie = labyrinthe["joueurs"]
+    partie = labyrinthe["liste_joueurs"]
     return numJoueurCourant(partie)
 
 def getPhase(labyrinthe):
@@ -105,7 +106,7 @@ def getListeJoueurs(labyrinthe):
     paramètre: labyrinthe le labyrinthe considéré
     résultat: les joueurs sous la forme de la structure implémentée dans listeJoueurs.py    
     """
-    return ListeJoueurs(labyrinthe["joueurs"])
+    return labyrinthe["liste_joueurs"]
 
 def enleverTresor(labyrinthe,lin,col,numTresor):
     """
@@ -206,7 +207,7 @@ def getCoordonneesTresorCourant(labyrinthe):
     """
     num_joueurs= labyrinthe["joueurs"]
     matrice = labyrinthe["matrice"]
-    trésor = prochainTresorJouer(labyrinthe["joueurs"],num_joueurs)
+    trésor = prochainTresorJoueur(labyrinthe["joueurs"],num_joueurs)
     for x in range(7):
         for y in range(7):
             carte = getVal(matrice["val"],x,y)

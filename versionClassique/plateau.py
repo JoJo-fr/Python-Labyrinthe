@@ -228,10 +228,6 @@ def marquageDirect(calque,plateau,val,marque):
     return res
     
 
-
-
-
-
 def accessible(plateau,ligD,colD,ligA,colA):
     """
     indique si il y a un chemin entre la case ligD,colD et la case ligA,colA du labyrinthe

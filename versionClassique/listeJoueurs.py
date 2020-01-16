@@ -11,6 +11,7 @@
 import random
 from joueur import *
 
+
 def ListeJoueurs(nomsJoueurs):
     """
     créer une liste de joueurs dont les noms sont dans la liste de noms passés en paramètre
@@ -34,7 +35,7 @@ def ajouterJoueur(joueurs, joueur):
                 joueur le joueur à ajouter
     cette fonction ne retourne rien mais modifie la liste des joueurs
     """
-    joueurs.append({"Nom": joueur,"Trésor":[]})
+    joueurs.append(Joueur(joueur))
 
 def initAleatoireJoueurCourant(joueurs):
     """
@@ -120,7 +121,7 @@ def numJoueurCourant(joueurs):
     résultat: le numéro du joueur courant
     """ 
     joueur = joueurs[0]
-    return joueur["Numero_joueur"]
+    return 
 
 def nomJoueurCourant(joueurs):
     """
@@ -128,7 +129,7 @@ def nomJoueurCourant(joueurs):
     paramètre: joueurs la liste des joueurs
     résultat: le nom du joueur courant
     """
-    return joueurs[0]["Nom"]
+    return getNom(joueurs[0])
 
 def nomJoueur(joueurs,numJoueur):
     """
@@ -137,7 +138,10 @@ def nomJoueur(joueurs,numJoueur):
                 numJoueur le numéro du joueur    
     résultat: le nom du joueur numJoueur
     """
-    return joueurs[numJoueur-1]["Nom"]
+    print("="*9)
+    print(joueurs)
+    return getNom(joueurs[numJoueur -1 ])
+
 
 def prochainTresorJoueur(joueurs,numJoueur):
     """
