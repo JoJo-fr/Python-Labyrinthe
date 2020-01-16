@@ -126,7 +126,7 @@ def getTresor(c):  # ok
     retourne la valeur du trésor qui se trouve sur la carte (0 si pas de trésor)
     paramètre: c une carte
     """
-    if c["Trésor"] != None:
+    if c["Trésor"] != 0:
         return c["Trésor"]
     return 0
 
