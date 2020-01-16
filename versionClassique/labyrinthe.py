@@ -25,30 +25,12 @@ def Labyrinthe(nomsJoueurs=["joueur1","joueurs2"],nbTresors=24, nbTresorsMax=0):
                 nbTresorMax le nombre de trésors maximum distribué à chaque joueur
     résultat: le labyrinthe crée
     """
-    """     
-    labyrinthe_creer = {}
-    ListeJoueur = []
+    joueurs = ListeJoueurs(nomsJoueurs) # structure des joueurs 
+    distribuerTresors(joueurs,nbTresors,nbTresorsMax) # distribuer les trésors au joueurs
+    partie = Plateau(getNbJoueurs(joueurs),nbTresors) # créer la partie 
+    return partie
 
-    ListeJoueur_creer = nomsJoueurs
-    distribuerTresors(ListeJoueur,nbTresors,nbTresorsMax)
-    initAleatoireJoueurCourant(ListeJoueur)
-
-    labyrinthe_creer["joueurs"] = ListeJoueur
-    labyrinthe_creer["labyrinthe"] = Plateau(getNbJoueurs(ListeJoueur),nbTresors)
-    return labyrinthe_creer 
-    """
-
-    labyrinthe = {
-        "joueures" : nomsJoueurs,
-        "tresors" : nbTresors,
-        "tresorsmax" : nbTresorsMax,
-        "plateau" : Plateau(len(nomsJoueurs),nbTresors)
-
-    }
-
-    return labyrinthe
-
-   
+Labyrinthe(nomsJoueurs=["joueur1","joueurs2"],nbTresors=24, nbTresorsMax=0)
 
 def getPlateau(labyrinthe):
     """
@@ -56,7 +38,8 @@ def getPlateau(labyrinthe):
     paramètre: labyrinthe le labyrinthe considéré
     résultat: la matrice représentant le plateau de ce labyrinthe
     """
-    return labyrinthe["labyrinthe"][0]
+    plateau = labyrinthe["matrice"]
+    return plateau["val"]
 
 def getNbParticipants(labyrinthe):
     """
@@ -64,7 +47,7 @@ def getNbParticipants(labyrinthe):
     paramètre: labyrinthe le labyrinthe considéré
     résultat: le nombre de joueurs de la partie
     """
-    return len(labyrinthe["Joueurs"])
+    return getNbJoueurs(labyrinthe["joueurs"])
 
 def getNomJoueurCourant(labyrinthe):
     """
@@ -72,7 +55,7 @@ def getNomJoueurCourant(labyrinthe):
     paramètre: labyrinthe le labyrinthe considéré
     résultat: le nom du joueurs courant
     """
-    partie = labyrinthe["Joueurs"]
+    partie = labyrinthe["joueurs"]
     return getJoueurCourant[partie]
 
 def getNumJoueurCourant(labyrinthe):
@@ -81,8 +64,8 @@ def getNumJoueurCourant(labyrinthe):
     paramètre: labyrinthe le labyrinthe considéré
     résultat: le numero du joueurs courant
     """
-    partie = labyrinthe["Joueurs"]
-    return numJoueurCourant[partie]
+    partie = labyrinthe["joueurs"]
+    return numJoueurCourant(partie)
 
 def getPhase(labyrinthe):
     """
@@ -106,8 +89,15 @@ def getNbTresors(labyrinthe):
     retourne le nombre de trésors qu'il reste sur le labyrinthe
     paramètre: labyrinthe le labyrinthe considéré
     résultat: le nombre de trésors sur le plateau
-    """    
-    pass
+    """ 
+    Nb_trésors = 0
+    plateau = labyrinthe["matrice"]
+    for x in range(7):
+        for y in range(7):
+            carte = getVal(plateau["val"],x,y)
+            if getNbTresors(carte) != 0:
+                Nb_trésors += 1
+    return Nb_trésors
 
 def getListeJoueurs(labyrinthe):
     """
@@ -115,8 +105,7 @@ def getListeJoueurs(labyrinthe):
     paramètre: labyrinthe le labyrinthe considéré
     résultat: les joueurs sous la forme de la structure implémentée dans listeJoueurs.py    
     """
-    return getListeJoueurs[labyrinthe["joueures"]]
-
+    return ListeJoueurs(labyrinthe["joueurs"])
 
 def enleverTresor(labyrinthe,lin,col,numTresor):
     """
@@ -129,7 +118,8 @@ def enleverTresor(labyrinthe,lin,col,numTresor):
                 numTresor: le numéro du trésor à prendre sur la carte
     la fonction ne retourne rien mais modifie le labyrinthe
     """
-    prendreTresorPlateau(labyrinthe,lin,col,numTresor)
+    plateau = labyrinthe["matrice"]
+    prendreTresorPlateau(labyrinthe["val"],lin,col,numTresor)
 
 def prendreJoueurCourant(labyrinthe,lin,col):
     """
@@ -140,7 +130,8 @@ def prendreJoueurCourant(labyrinthe,lin,col):
                 col: la colonne où se trouve la carte
     la fonction ne retourne rien mais modifie le labyrinthe    
     """
-    prendrePionPlateau(labyrinthe["Plateau"],lin,col,getJoueurCourant(labyrinthe["joueures"]))
+    plateau = labyrinthe["matrice"]
+    prendrePionPlateau(plateau["val"],lin,col,getJoueurCourant(plateau["joueurs"]))
 
 def poserJoueurCourant(labyrinthe,lin,col):
     """
