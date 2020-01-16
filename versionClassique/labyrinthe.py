@@ -75,7 +75,7 @@ def getPhase(labyrinthe):
     paramètre: labyrinthe le labyrinthe considéré
     résultat: le numéro de la phase de jeu courante
     """   
-    pass
+    return labyrinthe[0]["phase"]
 
 def changerPhase(labyrinthe):
     """
@@ -83,7 +83,10 @@ def changerPhase(labyrinthe):
     paramètre: labyrinthe le labyrinthe considéré
     la fonction ne retourne rien mais modifie le labyrinthe
     """    
-    pass
+    if labyrinthe[0]["phase"] == 1:
+        labyrinthe[0]["phase"] = 2
+    elif labyrinthe[0]["phase"] == 2:
+        labyrinthe[0]["phase"] = 1
 
 
 def getNbTresors(labyrinthe):
@@ -163,7 +166,11 @@ def coupInterdit(labyrinthe,direction,rangee):
                 rangee: le numéro de la ligne ou de la colonne choisie
     résultat: un booléen indiquant si le coup est interdit ou non
     """
-    pass
+    inserer=['N','E','S','O']
+    liste_nb=[1,3,5]
+    if direction not in inserer or rangee not in liste_nb:
+        return True
+    return False
 
 def jouerCarte(labyrinthe,direction,rangee):
     """
@@ -273,7 +280,11 @@ def accessibleDistJoueurCourant(labyrinthe, ligA,colA):
     résultat: une liste de couples d'entier représentant un chemin que le joueur
               courant atteigne la case d'arrivée s'il existe None si pas de chemin
     """
-    pass
+    coordJ = getCoordonneesJoueurCourant(labyrinthe)
+    if accessible(labyrinthe[0]["plateau"][0], coordJ[0], coordJ[1], ligA, colA) == True:
+        return accessibleDist(labyrinthe[0]["plateau"][0], coordJ[0], coordJ[1], ligA, colA)
+    else:
+        return None
 
 def finirTour(labyrinthe):
     """

@@ -30,6 +30,7 @@ def Plateau(nbJoueurs, nbTresors): #modifier la génération de joueur
     dictionaire_plateau = {}
     dictionaire_plateau["matrice"] = Matrice(7,7,0) # créer une matrice
     dictionaire_plateau["joueurs"] = [nbJoueurs] # injecter une clé et valeur nbjoueur
+    dictionaire_plateau["phase"]=1
 
     liste_de_carte_amovible = creerCartesAmovibles(1,random.randint(1,45)) # génére une liste aléatoire de carte dans une liste
     random.shuffle(liste_de_carte_amovible) # mélange les carte de maniérre aléatoire
