@@ -137,7 +137,7 @@ def nomJoueur(joueurs,numJoueur):
                 numJoueur le numéro du joueur    
     résultat: le nom du joueur numJoueur
     """
-    return joueurs[numJoueur]["Nom"]
+    return joueurs[numJoueur-1]["Nom"]
 
 def prochainTresorJoueur(joueurs,numJoueur):
     """
