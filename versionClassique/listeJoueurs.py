@@ -150,6 +150,7 @@ def prochainTresorJoueur(joueurs,numJoueur):
                 numJoueur le numéro du joueur    
     résultat: le prochain trésor du joueur numJoueur (un entier)
     """
+    print(joueurs)
     return prochainTresor(joueurs[numJoueur])
 
 def tresorCourant(joueurs):
@@ -158,7 +159,10 @@ def tresorCourant(joueurs):
     paramètre: joueurs la liste des joueurs 
     résultat: le prochain trésor du joueur courant (un entier)
     """
-    return joueurs["Trésor"]
+    joueur_courant = getJoueurCourant(joueurs)
+    trésor = joueur_courant["Trésor"]
+    if joueur_courant["Trésor"] != []:
+        return trésor[0]
 
 def joueurCourantAFini(joueurs):
     """
