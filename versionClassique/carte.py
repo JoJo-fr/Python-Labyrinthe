@@ -16,7 +16,6 @@ le caractère 'Ø' indique que l'indice ne correspond pas à une carte
 """
 listeCartes=['╬','╦','╣','╗','╩','═','╝','Ø','╠','╔','║','Ø','╚','Ø','Ø','Ø']
 
-
 def Carte( nord, est, sud, ouest, tresor=0, pions=[]):
     """
     permet de créer une carte:
@@ -61,7 +60,7 @@ def estValide(c):
     else:
         return True
 
-def murNord(c):  # ok
+def murNord(c):  
     """
     retourne un booléen indiquant si la carte possède un mur au nord
     paramètre: c une carte
@@ -69,21 +68,21 @@ def murNord(c):  # ok
     
     return c["Nord"]
 
-def murSud(c): # ok
+def murSud(c): 
     """
     retourne un booléen indiquant si la carte possède un mur au sud
     paramètre: c une carte
     """
     return c["Sud"]
 
-def murEst(c):  # ok
+def murEst(c):  
     """
     retourne un booléen indiquant si la carte possède un mur à l'est
     paramètre: c une carte
     """
     return c["Est"]
 
-def murOuest(c):  # ok
+def murOuest(c):  
     """
     retourne un booléen indiquant si la carte possède un mur à l'ouest
     paramètre: c une carte
@@ -106,7 +105,7 @@ def setListePions(c,listePions):
     """
     c["Pions"]=listePions
 
-def getNbPions(c): # ok 
+def getNbPions(c): 
     """
     retourne le nombre de pions se trouvant sur la carte
     paramètre: c une carte
@@ -121,7 +120,7 @@ def possedePion(c,pion):
     """
     return pion in c["Pions"]
 
-def getTresor(c):  # ok
+def getTresor(c):  
     """
     retourne la valeur du trésor qui se trouve sur la carte (0 si pas de trésor)
     paramètre: c une carte
@@ -169,7 +168,7 @@ def poserPion(c, pion):
     if pion not in c["Pions"]:
         c["Pions"].append(pion)
 
-def tournerHoraire(c):  # ok
+def tournerHoraire(c):  
     """
     fait tourner la carte dans le sens horaire
     paramètres: c une carte
@@ -182,10 +181,9 @@ def tournerHoraire(c):  # ok
     c["Nord"]=liste[0]
     c["Est"]=liste[1]
     c["Sud"]=liste[2]
-    c["Ouest"]=liste[3]
-    
+    c["Ouest"]=liste[3]   
 
-def tournerAntiHoraire(c):  # ok
+def tournerAntiHoraire(c):  
     """
     fait tourner la carte dans le sens anti-horaire
     paramètres: c une carte
@@ -206,7 +204,6 @@ def tourneAleatoire(c):
     nb_tours = random.randint(1,4) # nombre de tours générer de facon aléatoire 
     for i in range(nb_tours):
         tournerAntiHoraire(c) # on tourne la carte dans le sens antihoraire i fois
-    
 
 def coderMurs(c):
     """
@@ -231,7 +228,6 @@ def coderMurs(c):
         nb+=2**3
     return nb
     
-
 def decoderMurs(c,code):
     """
     positionne les murs d'une carte en fonction du code décrit précédemment
@@ -251,8 +247,6 @@ def decoderMurs(c,code):
     c["Est"] = murs[2]
     c["Sud"] = murs[1]
     c["Ouest"] = murs[0]
-    
-
 
 def toChar(c): #TODO
     """
@@ -261,7 +255,6 @@ def toChar(c): #TODO
     """
 
     return listeCartes[coderMurs(c)]
-
 
 def passageNord(carte1,carte2):
     """

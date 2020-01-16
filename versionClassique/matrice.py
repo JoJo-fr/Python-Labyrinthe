@@ -67,7 +67,6 @@ def setVal(matrice,ligne,colonne,valeur):
     """
     matrice['val'][ligne * getNbColonnes(matrice) + colonne] = valeur
 
-
 #-----------------------------------------
 # Fonctions utiles au débuggage
 #-----------------------------------------
@@ -99,8 +98,6 @@ def afficheMatrice(matrice, tailleCellule=4):
             print(str(getVal(matrice, i, j)).rjust(tailleCellule) + '|', end='')
         afficheLigneSeparatrice(matrice, tailleCellule)
     print()
-
-
 
 #------------------------------------------        
 # decalages

@@ -147,7 +147,6 @@ def animationChemin(lmt,chemin, joueur,pause=0.1):
 # CES FONCTIONS SONT A IMPLEMENTER
 # -------------------------------------------
 
-
 def saisirOrdre(lmt):
     """
     permet de saisir soit l'ordre de tourner la carte à jouer

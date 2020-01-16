@@ -13,7 +13,6 @@ from matrice import *
 from carte import *
 import random
 
-
 import os 
 os.system("rm -rf __pycache__")
 
@@ -94,10 +93,9 @@ def placement_carte(dictionaire_plateau,cartes,nbJoueurs):
     #afficheMatrice(dictionaire_plateau["matrice"])
     return dictionaire_plateau
 
-
 def placementCarteAngle(x,y,dictionaire_plateau,nbJoueurs):
     """
-    sous fonction qui a pour role de placer les angle 
+    sous fonction qui a pour role de placer les angles fixe sur le plateau
     """
     if x == 0 and y == 0:
         setVal(dictionaire_plateau["matrice"],x,y,Carte(True,False,False,True,0,[1])) # '╔'
@@ -113,7 +111,6 @@ def placementCarteAngle(x,y,dictionaire_plateau,nbJoueurs):
             setVal(dictionaire_plateau["matrice"],x,y,Carte(False,True,True,False,0,[4])) # '╝'
         else:
             setVal(dictionaire_plateau["matrice"],x,y,Carte(False,True,True,False,0,[])) # '╝'
-
 
 def creerCartesAmovibles(tresorDebut,nbTresors): # fonction valider
     """
@@ -221,7 +218,6 @@ def poserPionPlateau(plateau,lin,col,numJoueur): # fonction valider
     carte = getVal(labyrinthe,lin,col)
     poserPion(carte,numJoueur)
 
-
 def marquageDirect(calque,plateau,val,marque):
 
     calque = Matrice(7,7)
@@ -248,7 +244,6 @@ def marquageDirect(calque,plateau,val,marque):
                         res = True
     return res
     
-
 def accessible(plateau,ligD,colD,ligA,colA):
     """
     indique si il y a un chemin entre la case ligD,colD et la case ligA,colA du labyrinthe
@@ -269,7 +264,6 @@ def accessible(plateau,ligD,colD,ligA,colA):
         return True
     return False
     
-
 def accessibleDist(plateau,ligD,colD,ligA,colA):
     """
     indique si il y a un chemin entre la case ligD,colD et la case ligA,colA du plateau
@@ -304,5 +298,3 @@ def getCoordonneesTresor(plateau,numTresor): # fonction valider
                 return (x,y)
     return None
 #getCoordonneesTresor(Plateau(4,45),1)
-    
- 
