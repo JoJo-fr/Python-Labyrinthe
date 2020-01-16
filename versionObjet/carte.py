@@ -33,7 +33,7 @@ class Carte(object):
         paramètre: c une carte
         """
         cpt=0
-        liste=[self.nord,self.est,self.sud,self.ouest]
+        liste=[self.murNord(),self.murEst(),self.murSud(),self.murOuest()]
         for elem in liste:
             if elem:
                 cpt+=1
@@ -251,7 +251,7 @@ class Carte(object):
         paramètres carte1 et carte2 deux cartes
         résultat un booléen
         """
-        if not self.nord and not carte2.sud:
+        if not self.murNord() and not carte2.murSud():
             return True
         else:
             return False
@@ -262,7 +262,7 @@ class Carte(object):
         paramètres carte1 et carte2 deux cartes
         résultat un booléen
         """
-        if not self.sud and not carte2.nord:
+        if not self.murSud() and not carte2.murNord():
             return True
         else:
             return False
@@ -274,7 +274,7 @@ class Carte(object):
         paramètres carte1 et carte2 deux cartes
         résultat un booléen
         """
-        if not self.ouest and not carte2.est:
+        if not self.murOuest() and not carte2.murEst():
             return True
         else:
             return False
@@ -286,7 +286,7 @@ class Carte(object):
         paramètres carte1 et carte2 deux cartes
         résultat un booléen    
         """
-        if not self.est and not carte2.ouest:
+        if not self.murEst() and not carte2.murOuest():
             return True
         else:
             return False
