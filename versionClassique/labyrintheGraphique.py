@@ -16,7 +16,7 @@ import time
 import sys
 import os
 
-       
+
 AUCUNE=0
 ALPHA=1
 NUMERIQUE=2
