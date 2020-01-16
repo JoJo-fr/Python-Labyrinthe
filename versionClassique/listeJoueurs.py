@@ -138,7 +138,6 @@ def nomJoueur(joueurs,numJoueur):
                 numJoueur le numéro du joueur    
     résultat: le nom du joueur numJoueur
     """
-    print(joueurs)
     return getNom(joueurs[numJoueur -1 ])
 
 
@@ -161,7 +160,6 @@ def tresorCourant(joueurs):
     """
     joueur_courant = getJoueurCourant(joueurs)
     trésor = joueur_courant["Trésor"]
-    print(trésor)
     if joueur_courant["Trésor"] != []:
         return trésor[0]
 

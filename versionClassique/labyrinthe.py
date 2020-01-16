@@ -206,10 +206,11 @@ def getCoordonneesTresorCourant(labyrinthe):
     resultat: les coordonnées du trésor à chercher ou None si celui-ci 
               n'est pas sur le plateau
     """
-    #num_joueurs= labyrinthe[0]["liste_joueurs"]
+    num_joueurs= labyrinthe[0]["liste_joueurs"]
     matrice = labyrinthe[0]["matrice"]
-    #trésor = prochainTresorJoueur(num_joueurs,0)
-    tresor=tresorCourant(labyrinthe[0]["joueurs"])
+    tresor = prochainTresorJoueur(num_joueurs,0)
+  
+
     for x in range(7):
         for y in range(7):
             carte = getVal(matrice,x,y)
