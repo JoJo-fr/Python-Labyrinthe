@@ -162,8 +162,8 @@ def saisirOrdre(lmt):
               si l'ordre saisi n'est pas valide la focntion retourne (-1,-1)
     """
     choix=input("Tourner la carte(T) Ou Insérer la carte(N/E/S/O,RangeeVoulue)")
-    ordre=choix.split('T')
-    if ordre[0]==',':
+    ordre=choix.split(',')
+    if ordre[0]=='T':
         return ('T','T')
     elif int(ordre[1])==1 or int(ordre[1])==3 or int(ordre[1])==5:
         return (ordre[0],ordre[1])

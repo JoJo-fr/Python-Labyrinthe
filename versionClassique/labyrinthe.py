@@ -276,8 +276,9 @@ def executerActionPhase1(labyrinthe,action,rangee):
         tournerCarte(labyrinthe,sens='H')
     elif action in inserer and rangee in liste_nb:
         res=1
-    elif action>0 and rangee>0:
-        res=3
+    elif type(action)==int and type(rangee)==int:
+        if action>0 and rangee>0:
+            res=3
     return res
 
 def accessibleDistJoueurCourant(labyrinthe, ligA,colA):
