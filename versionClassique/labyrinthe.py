@@ -28,7 +28,6 @@ def Labyrinthe(nomsJoueurs=["joueur1","joueurs2"],nbTresors=24, nbTresorsMax=0):
     joueurs = ListeJoueurs(nomsJoueurs) # structure des joueurs 
     distribuerTresors(joueurs,nbTresors,nbTresorsMax) # distribuer les trésors au joueurs
     partie = Plateau(getNbJoueurs(joueurs),nbTresors) # créer la partie 
-    #partie["liste_joueurs"] = joueurs
     partie[0]["liste_joueurs"] = joueurs
     return partie
 
@@ -87,7 +86,6 @@ def changerPhase(labyrinthe):
         labyrinthe[0]["phase"] = 2
     elif labyrinthe[0]["phase"] == 2:
         labyrinthe[0]["phase"] = 1
-
 
 def getNbTresors(labyrinthe):
     """

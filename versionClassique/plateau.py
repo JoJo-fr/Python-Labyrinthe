@@ -13,7 +13,6 @@ from matrice import *
 from carte import *
 import random
 
-
 import os 
 os.system("rm -rf __pycache__")
 
@@ -47,44 +46,43 @@ def placement_carte(dictionaire_plateau,cartes,nbJoueurs):
     for x in range(7):
         for y in range(7):
             index += 1
-            if x == 0 and y == 0:
-                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,False,True,True,0,[1])) # '╔'
-            if x == 0 and y == 6:
-                setVal(dictionaire_plateau["matrice"],x,y,Carte(False,True,True,False,0,[2])) # '╗'
-            if x == 6 and y == 0:
-                if nbJoueurs > 2: # si on à 3 joueurs alors placer le joueur 3
-                    setVal(dictionaire_plateau["matrice"],x,y,Carte(True,False,False,True,0,[3])) # '╗'
-                else:
-                    setVal(dictionaire_plateau["matrice"],x,y,Carte(True,False,False,True,0,[])) # '╗'
-            if x == 6 and y == 6:
-                if nbJoueurs > 3: # si on à 4 joueurs alors placer le joueur 4
-                    setVal(dictionaire_plateau["matrice"],x,y,Carte(True,True,False,False,0,[4])) # '╝'
-                else:
-                    setVal(dictionaire_plateau["matrice"],x,y,Carte(True,True,False,False,0,[])) # '╝'
+            placementCarteAngle(x,y,dictionaire_plateau,nbJoueurs)
             if x == 0 and y == 2:
                 setVal(dictionaire_plateau["matrice"],x,y,Carte(False,False,False,True,0,[])) # '╠'
+
             if x == 0 and y == 4:
                 setVal(dictionaire_plateau["matrice"],x,y,Carte(False,False,False,True,0,[])) # '╠'
+
             if x == 2 and y == 2:
                 setVal(dictionaire_plateau["matrice"],x,y,Carte(False,False,False,True,0,[])) # '╠'
+
             if x == 6 and y == 2:
                 setVal(dictionaire_plateau["matrice"],x,y,Carte(False,True,False,False,0,[])) # '╣'
+
             if x == 6 and y == 4:
                 setVal(dictionaire_plateau["matrice"],x,y,Carte(False,True,False,False,0,[])) # '╣'
+
             if x == 4 and y == 4:
                 setVal(dictionaire_plateau["matrice"],x,y,Carte(False,True,False,False,0,[])) # '╣'
+
             if x == 2 and y == 0:
                 setVal(dictionaire_plateau["matrice"],x,y,Carte(True,False,False,False,0,[])) # '╦'
+
             if x == 4 and y == 0:
                 setVal(dictionaire_plateau["matrice"],x,y,Carte(True,False,False,False,0,[])) # '╦'
+
             if x == 4 and y == 2:
                 setVal(dictionaire_plateau["matrice"],x,y,Carte(True,False,False,False,0,[])) # '╦'
+
             if x == 2 and y == 6:
                 setVal(dictionaire_plateau["matrice"],x,y,Carte(False,False,True,True,0,[])) # '╩'
+
             if x == 4 and y == 6:
                 setVal(dictionaire_plateau["matrice"],x,y,Carte(False,False,True,True,0,[])) # '╩'
+
             if x == 2 and y == 4:
                 setVal(dictionaire_plateau["matrice"],x,y,Carte(False,False,True,True,0,[])) # '╩'
+
     # ajouter les cartes amovible sur le plateau
     index = -1
     for x in range(7):
@@ -94,6 +92,25 @@ def placement_carte(dictionaire_plateau,cartes,nbJoueurs):
                 setVal(dictionaire_plateau["matrice"],x,y,cartes[index])
     #afficheMatrice(dictionaire_plateau["matrice"])
     return dictionaire_plateau
+
+def placementCarteAngle(x,y,dictionaire_plateau,nbJoueurs):
+    """
+    sous fonction qui a pour role de placer les angles fixe sur le plateau
+    """
+    if x == 0 and y == 0:
+        setVal(dictionaire_plateau["matrice"],x,y,Carte(True,False,False,True,0,[1])) # '╔'
+    if x == 0 and y == 6:
+        setVal(dictionaire_plateau["matrice"],x,y,Carte(True,True,False,False,0,[2])) # '╗'
+    if x == 6 and y == 0:
+        if nbJoueurs > 2: # si on à 3 joueurs alors placer le joueur 3
+            setVal(dictionaire_plateau["matrice"],x,y,Carte(False,False,True,True,0,[3])) # '╗'
+        else:
+            setVal(dictionaire_plateau["matrice"],x,y,Carte(False,False,True,True,0,[])) # '╗'
+    if x == 6 and y == 6:
+        if nbJoueurs > 3: # si on à 4 joueurs alors placer le joueur 4
+            setVal(dictionaire_plateau["matrice"],x,y,Carte(False,True,True,False,0,[4])) # '╝'
+        else:
+            setVal(dictionaire_plateau["matrice"],x,y,Carte(False,True,True,False,0,[])) # '╝'
 
 def creerCartesAmovibles(tresorDebut,nbTresors): # fonction valider
     """
@@ -201,7 +218,6 @@ def poserPionPlateau(plateau,lin,col,numJoueur): # fonction valider
     carte = getVal(labyrinthe,lin,col)
     poserPion(carte,numJoueur)
 
-
 def marquageDirect(calque,plateau,val,marque):
 
     calque = Matrice(7,7)
@@ -228,7 +244,6 @@ def marquageDirect(calque,plateau,val,marque):
                         res = True
     return res
     
-
 def accessible(plateau,ligD,colD,ligA,colA):
     """
     indique si il y a un chemin entre la case ligD,colD et la case ligA,colA du labyrinthe
@@ -249,7 +264,6 @@ def accessible(plateau,ligD,colD,ligA,colA):
         return True
     return False
     
-
 def accessibleDist(plateau,ligD,colD,ligA,colA):
     """
     indique si il y a un chemin entre la case ligD,colD et la case ligA,colA du plateau
@@ -284,5 +298,3 @@ def getCoordonneesTresor(plateau,numTresor): # fonction valider
                 return (x,y)
     return None
 #getCoordonneesTresor(Plateau(4,45),1)
-    
- 

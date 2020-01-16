@@ -22,10 +22,10 @@ def ListeJoueurs(nomsJoueurs):
     liste_joueur = []
     Position_joueur = 0
     for nom in nomsJoueurs:
-        liste_joueur.append(Joueur(nom))
+        liste_joueur.append(Joueur(nom)) # ajoute un joueur à la liste des joueurs
     for joueur in liste_joueur:
         Position_joueur += 1
-        joueur["Numero_joueur"] = Position_joueur
+        joueur["Numero_joueur"] = Position_joueur # ajoute un numéro pour chaque joueur
     return liste_joueur
 
 def ajouterJoueur(joueurs, joueur):
@@ -62,12 +62,12 @@ def distribuerTresors(joueurs,nbTresors=24, nbTresorMax=0):
     deja_attribue = []
     for x in range(len(joueurs)):
         while len(joueurs[x]["Trésor"]) != nbTresorMax:
-            tresor_aleatoire = random.randint(1,nbTresors)
+            tresor_aleatoire = random.randint(1,nbTresors) # génére aléatoirement un nombre entre 1 et nbTresors
             if tresor_aleatoire not in deja_attribue :
-                deja_attribue.append(tresor_aleatoire)
+                deja_attribue.append(tresor_aleatoire) # ajouter un trésor déja utiliser
 
                 if tresor_aleatoire not in joueurs[x]["Trésor"]:
-                    joueurs[x]["Trésor"].append(tresor_aleatoire)
+                    joueurs[x]["Trésor"].append(tresor_aleatoire) # ajoute le trésor au joueur
     
 def changerJoueurCourant(joueurs): 
     """
@@ -75,9 +75,9 @@ def changerJoueurCourant(joueurs):
     paramètres: joueurs la liste des joueurs
     cette fonction ne retourne rien mais modifie la liste des joueurs
     """
-    joueur_courant_changer = joueurs[0]
-    joueurs.pop(0)
-    joueurs.insert(len(joueurs),joueur_courant_changer)
+    joueur_courant_changer = joueurs[0] # récupére le joueur courant actuel 
+    joueurs.pop(0) # retire le joueur courant
+    joueurs.insert(len(joueurs),joueur_courant_changer) # insére le joueur courant actuel en fin de liste
 
 def getNbJoueurs(joueurs):
     """
