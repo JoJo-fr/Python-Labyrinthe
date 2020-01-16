@@ -249,7 +249,17 @@ def executerActionPhase1(labyrinthe,action,rangee):
               3 si action et rangee sont des entiers positifs
               4 dans tous les autres cas
     """
-    pass
+    res=4
+    inserer=['N','E','S','O']
+    liste_nb=[1,3,5]
+    if action=='T':
+        res=0
+        tournerCarte(labyrinthe,sens='H')
+    elif action in inserer and rangee in liste_nb:
+        res=1
+    elif action>0 and rangee>0:
+        res=3
+    return res
 
 def accessibleDistJoueurCourant(labyrinthe, ligA,colA):
     """
