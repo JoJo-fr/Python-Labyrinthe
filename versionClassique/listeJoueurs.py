@@ -120,8 +120,8 @@ def numJoueurCourant(joueurs):
     paramètre: joueurs la liste des joueurs
     résultat: le numéro du joueur courant
     """ 
-    print(joueurs[0]["Numero_joueur"])
-    return joueurs[0]["Numero_joueur"]
+    joueur = joueurs[0]
+    return joueur
 
 def nomJoueurCourant(joueurs):
     """
