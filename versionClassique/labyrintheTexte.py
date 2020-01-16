@@ -83,6 +83,8 @@ def afficheLabyrinthe(lmt,message="",sauts=0):
         print()
     print()
     print("C'est au tour de ",end='')
+    print(nomJoueurCourant(listeJoueurs))
+    print(numJoueurCourant(listeJoueurs))
     pcouleur(nomJoueurCourant(listeJoueurs),numJoueurCourant(listeJoueurs))
     print(" de jouer")
     tresor=tresorCourant(listeJoueurs)
