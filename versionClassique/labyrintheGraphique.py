@@ -26,6 +26,8 @@ class LabyrintheGraphique(object):
 
     def __init__(self, labyrinthe, titre='Labyrinthe des IUT', size=(1000, 800), couleur=(209,238,238),prefixeImage="./images"):
         """Method docstring."""
+        pygame.mixer.music.load('son.wav')
+        pygame.mixer.music.play()
         self.messageInfo=None
         self.imgInfo=None
         self.labyrinthe=labyrinthe
