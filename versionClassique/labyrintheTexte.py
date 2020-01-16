@@ -223,7 +223,7 @@ def demarrer(lmt):
                 afficheLabyrinthe(lmt,"Veuillez choisir une case du labyrinthe")
             else: # coordonées correctes 
                   #=> on va verifier l'accessibilité de la case destination pour le joueur courant 
-                chemin=accessibleDist(plateau,xDep,yDep,xA,yA)
+                chemin=accessibleDist(plateau[0]["matrice"],xDep,yDep,xA,yA)
                 if chemin==None:
                     afficheLabyrinthe(lmt,"Cette case n'est pas accessible au joueur "+nomJC)
         # le joueur a saisi une destination correcte et accessible

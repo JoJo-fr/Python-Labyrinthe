@@ -277,7 +277,34 @@ def accessibleDist(plateau,ligD,colD,ligA,colA):
     résultat: une liste de coordonées indiquant un chemin possible entre la case
               de départ et la case d'arrivée
     """
-    pass
+    calque = Matrice(7, 7, -1)
+    mat=plateau[0]["matrice"]
+    cpt = 0
+    setVal(calque, ligD, colD, cpt)
+    voisin = [(ligD, colD)]
+    verif = [(ligD, colD)]
+    while len(verif) != 0 and (ligA, colA) not in voisin:
+        cpt += 1
+        li = []
+        for ligne, colone in verif:
+            nouveau = [(ligne-1,colone), (ligne+1,colone), (ligne,colone-1), (ligne,colone+1)]
+            nouveau = [(lig, col) for lig, col in nouveau if lig >= 0 and col >= 0 and lig <= getNbLignes(mat) -1 and col <= getNbColonnes(mat)-1 and (lig, col) not in voisin]
+            for lig, col in nouveau:
+                if lig == ligne-1 and passageNord(getVal(mat, ligne, colone), getVal(mat, lig, col)):
+                    li.append((lig, col))
+                    setVal(calque, lig, col, cpt)
+                if lig == ligne+1 and passageSud(getVal(mat, ligne, colone), getVal(mat, lig, col)):
+                    li.append((lig, col))
+                    setVal(calque, lig, col, cpt)
+                if col == colone-1 and passageOuest(getVal(mat, ligne, colone), getVal(mat, lig, col)):
+                    li.append((lig, col))
+                    setVal(calque, lig, col, cpt)
+                if col == colone+1 and passageEst(getVal(mat, ligne, colone), getVal(mat, lig, col)):
+                    li.append((lig, col))
+                    setVal(calque, lig, col, cpt)
+            voisin += li
+        verif = li
+    return (ligA, colA) in voisin
 
 def getCoordonneesTresor(plateau,numTresor): # fonction valider
     """
