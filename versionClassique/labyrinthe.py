@@ -131,7 +131,7 @@ def prendreJoueurCourant(labyrinthe,lin,col):
     la fonction ne retourne rien mais modifie le labyrinthe    
     """
     plateau = labyrinthe["matrice"]
-    prendrePionPlateau(plateau["val"],lin,col,getJoueurCourant(plateau["joueurs"]))
+    prendrePionPlateau(plateau,lin,col,getJoueurCourant(plateau["joueurs"]))
 
 def poserJoueurCourant(labyrinthe,lin,col):
     """
@@ -141,7 +141,8 @@ def poserJoueurCourant(labyrinthe,lin,col):
                 col: la colonne où se trouve la carte
     la fonction ne retourne rien mais modifie le labyrinthe     
     """
-    poserPionPlateau(labyrinthe["Plateau"],lin,col,getJoueurCourant(labyrinthe["joueures"]))
+    plateau = labyrinthe["matrice"]
+    poserPionPlateau(plateau,lin,col,getJoueurCourant(labyrinthe["joueurs"]))
 
 def getCarteAJouer(labyrinthe):
     """
@@ -194,7 +195,7 @@ def getTresorCourant(labyrinthe):
     paramètre: labyritnthe: le labyrinthe considéré 
     resultat: le numéro du trésor recherché par le joueur courant
     """
-    pass
+    return tresorCourant(labyrinthe["joueurs"])
 
 def getCoordonneesTresorCourant(labyrinthe):
     """
@@ -203,8 +204,15 @@ def getCoordonneesTresorCourant(labyrinthe):
     resultat: les coordonnées du trésor à chercher ou None si celui-ci 
               n'est pas sur le plateau
     """
-    pass
-
+    num_joueurs= labyrinthe["joueurs"]
+    matrice = labyrinthe["matrice"]
+    trésor = prochainTresorJouer(labyrinthe["joueurs"],num_joueurs)
+    for x in range(7):
+        for y in range(7):
+            carte = getVal(matrice["val"],x,y)
+            if getTresor(carte) != 0:
+                return (x,y)
+    return None
 
 def getCoordonneesJoueurCourant(labyrinthe):
     """
@@ -213,8 +221,14 @@ def getCoordonneesJoueurCourant(labyrinthe):
     resultat: les coordonnées du joueur courant ou None si celui-ci 
               n'est pas sur le plateau
     """
-    pass
-
+    joueur_courant = numJoueurCourant(labyrinthe["joueurs"])
+    matrice = labyrinthe["matrice"]
+    for x in range(7):
+        for y in range(7):
+            carte = getVal(matrice["val"],x,y)
+            if carte["Numero_joueur"] == joueur_courant:
+                return (x,y)
+    return None
 
 def executerActionPhase1(labyrinthe,action,rangee):
     """
