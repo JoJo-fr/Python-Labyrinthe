@@ -57,8 +57,8 @@ def getNomJoueurCourant(labyrinthe):
     paramètre: labyrinthe le labyrinthe considéré
     résultat: le nom du joueurs courant
     """
-    partie = labyrinthe[0]["joueurs"]
-    return getJoueurCourant[partie]
+    joueurs = labyrinthe[0]["joueurs"]
+    return getJoueurCourant(joueurs)
 
 def getNumJoueurCourant(labyrinthe):
     """
@@ -66,8 +66,8 @@ def getNumJoueurCourant(labyrinthe):
     paramètre: labyrinthe le labyrinthe considéré
     résultat: le numero du joueurs courant
     """
-    partie = labyrinthe[0]["liste_joueurs"]
-    return numJoueurCourant(partie)
+    joueur = labyrinthe[0]["liste_joueurs"]
+    return numJoueurCourant(joueur)
 
 def getPhase(labyrinthe):
     """
@@ -121,7 +121,7 @@ def enleverTresor(labyrinthe,lin,col,numTresor):
     la fonction ne retourne rien mais modifie le labyrinthe
     """
     plateau = labyrinthe[0]["matrice"]
-    prendreTresorPlateau(labyrinthe["val"],lin,col,numTresor)
+    prendreTresorPlateau(plateau["val"],lin,col,numTresor)
 
 def prendreJoueurCourant(labyrinthe,lin,col):
     """
@@ -197,22 +197,23 @@ def getTresorCourant(labyrinthe):
     paramètre: labyritnthe: le labyrinthe considéré 
     resultat: le numéro du trésor recherché par le joueur courant
     """
-    return tresorCourant(labyrinthe["joueurs"])
+    return tresorCourant(labyrinthe[0]["joueurs"])
 
 def getCoordonneesTresorCourant(labyrinthe):
     """
     donne les coordonnées du trésor que le joueur courant doit trouver
-    paramètre: labyritnthe: le labyrinthe considéré 
+    paramètre: labyrinthe: le labyrinthe considéré 
     resultat: les coordonnées du trésor à chercher ou None si celui-ci 
               n'est pas sur le plateau
     """
-    num_joueurs= labyrinthe[0]["liste_joueurs"]
+    #num_joueurs= labyrinthe[0]["liste_joueurs"]
     matrice = labyrinthe[0]["matrice"]
-    trésor = prochainTresorJoueur(num_joueurs,0)
+    #trésor = prochainTresorJoueur(num_joueurs,0)
+    tresor=tresorCourant(labyrinthe[0]["joueurs"])
     for x in range(7):
         for y in range(7):
             carte = getVal(matrice,x,y)
-            if getTresor(carte) != 0:
+            if getTresor(carte)==tresor:
                 return (x,y)
     return None
 
@@ -227,7 +228,7 @@ def getCoordonneesJoueurCourant(labyrinthe):
     matrice = labyrinthe[0]["matrice"]
     for x in range(7):
         for y in range(7):
-            carte = getVal(labyrinthe[0]["matrice"],x,y)
+            carte = getVal(matrice,x,y)
             if carte["Pions"] == joueur_courant:
                 return (x,y)
     return None
