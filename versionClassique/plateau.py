@@ -35,7 +35,7 @@ def Plateau(nbJoueurs, nbTresors): #modifier la génération de joueur
     random.shuffle(liste_de_carte_amovible) # mélange les carte de maniérre aléatoire
 
     placement_carte(dictionaire_plateau,liste_de_carte_amovible,nbJoueurs) # injecter les carte fixe et amovible
-    return dictionaire_plateau
+    return (dictionaire_plateau,liste_de_carte_amovible[-1])
 
 def placement_carte(dictionaire_plateau,cartes,nbJoueurs):
     """
@@ -146,7 +146,7 @@ def prendreTresorPlateau(plateau,lig,col,numTresor): # prendre un trésor signif
                 numTresor: le numéro du trésor à prendre sur la carte
     resultat: un booléen indiquant si le trésor était bien sur la carte considérée
     """
-    labyrinthe = plateau["matrice"]
+    labyrinthe = plateau[0]["matrice"]
     carte = getVal(labyrinthe,lig,col)
     if getTresor(carte) == numTresor:
         return True
@@ -162,7 +162,7 @@ def getCoordonneesJoueur(plateau,numJoueur): # fonction valider
               le joueur n'est pas sur le plateau
     """
     index = -1
-    labyrinthe = plateau["matrice"]
+    labyrinthe = plateau[0]["matrice"]
     matrice = labyrinthe["val"]
     for x in range(7):
         for y in range(7):
@@ -181,7 +181,7 @@ def prendrePionPlateau(plateau,lin,col,numJoueur): # fonction valider
                 numJoueur: le numéro du joueur qui correspond au pion
     Cette fonction ne retourne rien mais elle modifie le plateau
     """
-    labyrinthe = plateau["matrice"]
+    labyrinthe = plateau[0]["matrice"]
     carte = getVal(labyrinthe,lin,col)
     prendrePion(carte,numJoueur)
 
@@ -196,7 +196,7 @@ def poserPionPlateau(plateau,lin,col,numJoueur): # fonction valider
                 numJoueur: le numéro du joueur qui correspond au pion
     Cette fonction ne retourne rien mais elle modifie le plateau
     """
-    labyrinthe = plateau["matrice"]
+    labyrinthe = plateau[0]["matrice"]
     carte = getVal(labyrinthe,lin,col)
     poserPion(carte,numJoueur)
 
@@ -211,7 +211,7 @@ def marquageDirect(calque,plateau,val,marque):
     for l in range(nb_lignes):
         for c in range(nb_Cols):
             if getVal(calque,l,c) == 0: # je ne suis pas marqué
-                carte_actuelle = getVal(plateau["matrice"],l,c)
+                carte_actuelle = getVal(plateau[0]["matrice"],l,c)
                 if murEst(carte_actuelle) == True and murOuest(carte_actuelle) == True and murNord(carte_actuelle) == True and murSud(carte_actuelle) == True: 
                     if l > 0 and getVal(calque,l-1,c) == val: # mon voisin du haut est marqué
                         setVal(calque,l,c,marque)
@@ -243,7 +243,7 @@ def accessible(plateau,ligD,colD,ligA,colA):
     setVal(calque,ligD,colD,3)
     matrice=True
     while matrice==True:
-        matrice=marquageDirect(calque,plateau["matrice"],3,3)
+        matrice=marquageDirect(calque,plateau[0]["matrice"],3,3)
     if getVal(calque,ligA-1,colD-1)==3:
         return True
     return False
@@ -274,7 +274,7 @@ def getCoordonneesTresor(plateau,numTresor): # fonction valider
               le trésor n'est pas sur le plateau
     """
     index = -1
-    labyrinthe = plateau["matrice"]
+    labyrinthe = plateau[0]["matrice"]
     for x in range(7):
         for y in range(7):
             index += 1
